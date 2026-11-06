@@ -1,7 +1,7 @@
 import { ERRO } from './afd.ts'
 import type { Receita } from './receitas.ts'
 
-const RAIO = 12
+const RAIO = 14
 
 /** Quadro da receita: estados nas posições do layout, arestas agrupadas por par (de, para). */
 export function grafo(r: Receita, trilha: string[]) {
@@ -29,8 +29,8 @@ export function grafo(r: Receita, trilha: string[]) {
     const rotulo = simbolos.join(',')
     if (de === para) {
       const d = y1 > 65 ? 1 : -1 // laço para fora do quadro
-      out += `<g class="${cls}"><path d="M${x1 - 6} ${y1 + d * 10} C${x1 - 14} ${y1 + d * 34} ${x1 + 14} ${y1 + d * 34} ${x1 + 6} ${y1 + d * 10}"/>`
-      out += `<text x="${x1}" y="${y1 + d * 32 + (d > 0 ? 7 : -2)}">${rotulo}</text></g>`
+      out += `<g class="${cls}"><path d="M${x1 - 7} ${y1 + d * 12} C${x1 - 16} ${y1 + d * 38} ${x1 + 16} ${y1 + d * 38} ${x1 + 7} ${y1 + d * 12}"/>`
+      out += `<text x="${x1}" y="${y1 + d * 43}">${rotulo}</text></g>`
       continue
     }
     const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy)
@@ -40,8 +40,8 @@ export function grafo(r: Receita, trilha: string[]) {
     const mx = (x1 + x2) / 2 + uy * curva, my = (y1 + y2) / 2 - ux * curva
     const ax = x1 + ux * RAIO, ay = y1 + uy * RAIO, bx = x2 - ux * (RAIO + 2), by = y2 - uy * (RAIO + 2)
     // o meio da curva fica na metade do caminho até o ponto de controle
-    const off = curva / 2 + 6
-    const lx = (x1 + x2) / 2 + uy * off, ly = (y1 + y2) / 2 - ux * off + 3
+    const off = curva / 2 + 10
+    const lx = (x1 + x2) / 2 + uy * off, ly = (y1 + y2) / 2 - ux * off
     out += `<g class="${cls}"><path d="M${ax} ${ay} Q${mx} ${my} ${bx} ${by}"/><text x="${lx}" y="${ly}">${rotulo}</text></g>`
   }
 
@@ -53,9 +53,9 @@ export function grafo(r: Receita, trilha: string[]) {
     const fin = afd.finais.includes(q)
     out += `<g class="estado${q === atual ? ' atual' : ''}${fin ? ' final' : ''}${q === ERRO ? ' erro' : ''}">`
     out += `<circle cx="${x}" cy="${y}" r="${RAIO}"/>${fin ? `<circle cx="${x}" cy="${y}" r="${RAIO - 3}"/>` : ''}`
-    out += `<text x="${x}" y="${y + 3}">${q.replace(/^q/, '')}</text></g>`
+    out += `<text x="${x}" y="${y}">${q.replace(/^q/, '')}</text></g>`
   }
-  return `<svg class="grafo" viewBox="0 0 240 130" role="img" aria-label="Grafo da receita ${r.nome}">
+  return `<svg class="grafo" viewBox="0 -10 240 150" role="img" aria-label="Grafo da receita ${r.nome}">
     <defs><marker id="seta" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
     <path d="M0 0 L6 3 L0 6 z" fill="context-stroke"/></marker></defs>${out}</svg>`
 }

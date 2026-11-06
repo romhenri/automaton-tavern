@@ -105,7 +105,7 @@ export const RECEITAS: Receita[] = [
       },
     },
     falas: { incompleto: 'Azedou! Conta as bagas, criatura!' },
-    layout: { q0: [36, 65], qPar: [116, 44], qImpar: [116, 86], q3: [204, 44] },
+    layout: { q0: [36, 65], qPar: [116, 42], qImpar: [116, 86], q3: [204, 42] },
     exemplos: { aceitas: ['tB', 'bbB', 'btbB'], rejeitadas: ['bB', 'bbbB'] },
   },
   {
