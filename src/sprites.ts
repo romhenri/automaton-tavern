@@ -114,23 +114,55 @@ const EXPRESSAO: Record<Expressao, Layer> = {
   bravo: top(['', '', '', '', '....kk....kk....', '.....e....e.....']),
 }
 
-/** Retrato de anão, sempre igual para o mesmo nome e ofício. */
-export function dwarfSprite(name: string, profession: string, expr: Expressao = 'neutro'): Grid {
+// Partes opcionais para anões com aparência definida (fases bônus).
+const SEM_BARBA: Layer = [
+  '', '', '', '', '', '', '',
+  '.._kssss', // queixo
+  '.kccckss', // pescoço
+  'kscccccc',
+  'ksckcccc',
+  'kskccccc',
+  '.kklkccc',
+  '...kccck',
+  '', '',
+]
+const BIGODE: Layer = top(['', '', '', '', '', '', '', '.....bbb', '.......b', '.......B'])
+const CABELO_LONGO: Layer = top(['', '', '', '.khhhhhh', 'khh.....', 'khh.....', 'khh.....', 'khh.....', 'kh......', 'kh......', 'kh......', '.k......'])
+const CACHOS: Layer = top(['...k.k.k', '..khkhkh', '.khhhhhh'])
+const OCULOS: Layer = top(['', '', '', '', '....ooo.', '....o.oo', '....ooo.']) // armação prateada, aparece em cabelo escuro
+
+export type Visual = {
+  cabelo?: string
+  pele?: string
+  roupa?: string
+  barba?: 'cheia' | 'bigode' | 'nenhuma'
+  longo?: boolean
+  cachos?: boolean
+  oculos?: boolean
+}
+
+/** Retrato de anão, sempre igual para o mesmo nome e ofício. `v` fixa partes da aparência. */
+export function dwarfSprite(name: string, profession: string, expr: Expressao = 'neutro', v: Visual = {}): Grid {
   const r = rng(hash(name))
   const pick = <T,>(a: T[]) => a[Math.floor(r() * a.length)]
-  const beard = pick(BEARD)
-  const skin = pick(SKIN)
+  const beard = v.cabelo ?? pick(BEARD)
+  const skin = v.pele ?? pick(SKIN)
   const pal: Pal = {
     h: shade(beard, 0.85), b: beard, B: shade(beard, 0.7), s: expr === 'bravo' ? '#d8604a' : skin, S: '#c08a6a',
-    e: expr === 'bravo' ? '#ff3b2f' : '#1b1410', c: CLOTH[profession] ?? '#7a6a5a', l: '#3a2a18', d: '#3a2a18',
+    e: expr === 'bravo' ? '#ff3b2f' : '#1b1410', c: v.roupa ?? CLOTH[profession] ?? '#7a6a5a', l: '#3a2a18', d: '#3a2a18',
     m: '#9aa0aa', M: '#d8dce4',
   }
   const layers = [DWARF]
+  if (v.barba === 'nenhuma' || v.barba === 'bigode') layers.push(SEM_BARBA)
+  if (v.barba === 'bigode') layers.push(BIGODE)
+  if (v.longo) layers.push(CABELO_LONGO)
+  if (v.cachos) layers.push(CACHOS)
   if (MILITARY.has(profession)) layers.push(HELMET)
   const tool = TOOL_OF[profession]
   if (tool) layers.push(TOOL[tool])
   layers.push(EXPRESSAO[expr])
-  return compose(layers, { ...pal, w: '#c8ccd4', y: '#f0d070', n: '#9c6a2f' })
+  if (v.oculos) layers.push(OCULOS)
+  return compose(layers, { ...pal, w: '#c8ccd4', y: '#f0d070', n: '#9c6a2f', o: '#d8dce4' })
 }
 
 // ---------------------------------------------------------------- balcão: ingredientes e ações

@@ -1,4 +1,5 @@
 import { complemento, type AFD } from './afd.ts'
+import type { Visual } from './sprites.ts'
 
 export type Simbolo = { s: string; nome: string; acao: boolean; sabor: string }
 
@@ -21,6 +22,8 @@ export type Receita = {
   cliente: string
   /** Ofício do anão no cliente dwarf-fortress-api: define roupa e ferramenta do sprite. */
   oficio: string
+  /** Aparência fixa; sem ela o sprite sai do hash do nome. */
+  visual?: Visual
   fala: string
   conceito: string
   afd: AFD

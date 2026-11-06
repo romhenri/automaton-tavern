@@ -2,7 +2,7 @@ import './style.css'
 import { ERRO, executar } from './afd.ts'
 import { grafo } from './grafo.ts'
 import { CAPACIDADE, DRINKS, PACIENCIA, novoTurno, servir, type Turno, type Veredito } from './jogo.ts'
-import { ALFABETO, RECEITAS } from './receitas.ts'
+import { ALFABETO, RECEITAS, type Receita } from './receitas.ts'
 import { BARRIL, LIXEIRA, VOLTAR, canecaSprite, dwarfSprite, icone, svg, type Expressao } from './sprites.ts'
 
 const REACAO: Record<Veredito, { fala: string; cara: Expressao; anim: string }> = {
@@ -20,6 +20,7 @@ let turno: Turno
 let cadeia: string[] = []
 
 const $ = <T extends HTMLElement>(sel: string) => palco.querySelector<T>(sel)!
+const retrato = (r: Receita, expr: Expressao = 'neutro') => dwarfSprite(r.cliente, r.oficio, expr, r.visual)
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`)
 
 // Resolução base 320x180 em dobro (640x360), escalada por inteiro.
@@ -83,12 +84,12 @@ function almanaque(pag = 0) {
     <nav class="abas">
       <h2 class="painel-titulo">Almanaque</h2>
       ${aba(0, `${svg(icone('m'), 24)}<span>Ingredientes e ações</span>`)}
-      ${RECEITAS.map((x, i) => aba(i + 1, `${svg(dwarfSprite(x.cliente, x.oficio), 24)}<span>${x.cliente}</span>`)).join('')}
+      ${RECEITAS.map((x, i) => aba(i + 1, `${svg(retrato(x), 24)}<span>${x.cliente}</span>`)).join('')}
       <button class="btn btn-gold" data-ir="titulo">Voltar</button>
     </nav>
     <article class="painel pagina">${r ? `
       <header class="ficha">
-        ${svg(dwarfSprite(r.cliente, r.oficio), 64)}
+        ${svg(retrato(r), 64)}
         <div>
           <h2>${r.nome}</h2>
           <p class="muted">Pedido de <span class="ouro">${r.cliente}</span> · ${r.conceito}</p>
@@ -165,7 +166,7 @@ function fimTurno() {
   div.innerHTML = `
     <div class="painel resumo">
       <h2 class="painel-titulo">${ok ? 'Cliente satisfeito!' : 'Cliente foi embora bravo!'}</h2>
-      ${svg(dwarfSprite(turno.receita.cliente, turno.receita.oficio, ok ? 'feliz' : 'bravo'), 96)}
+      ${svg(retrato(turno.receita, ok ? 'feliz' : 'bravo'), 96)}
       <p>"${ok ? 'Que taverna! Volto amanhã.' : 'Chega! Vou beber com os elfos!'}"</p>
       <p>Moedas no turno: <b class="ouro">☼${turno.moedas}</b> · Total: <b class="ouro">☼${moedas}</b></p>
       <p>Reputação: <b class="${ok ? 'verde' : 'vermelho'}">${reputacao} (${ok ? '+1' : '-1'})</b></p>
@@ -198,7 +199,7 @@ function fases() {
       <h2 class="painel-titulo">Fases</h2>
       ${RECEITAS.map((r, i) => `
         <button class="btn fase${i === nivel ? ' ativa' : ''}" data-ir="nivel" data-pag="${i}">
-          ${svg(dwarfSprite(r.cliente, r.oficio), 24)}<span>${i + 1}. ${r.cliente}</span><small class="muted">${r.nome}</small>
+          ${svg(retrato(r), 24)}<span>${i + 1}. ${r.cliente}</span><small class="muted">${r.nome}</small>
         </button>`).join('')}
       <button class="btn" data-ir="fechar">Fechar</button>
     </div>`
@@ -207,7 +208,7 @@ function fases() {
 }
 
 function anao(expr: Expressao, fala: string, anim = '') {
-  $('#anao').innerHTML = svg(dwarfSprite(turno.receita.cliente, turno.receita.oficio, expr), 96, anim)
+  $('#anao').innerHTML = svg(retrato(turno.receita, expr), 96, anim)
   $('#fala').textContent = fala
 }
 
