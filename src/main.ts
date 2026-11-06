@@ -208,7 +208,7 @@ function fases() {
 }
 
 function anao(expr: Expressao, fala: string, anim = '') {
-  $('#anao').innerHTML = svg(retrato(turno.receita, expr), 96, anim)
+  $('#anao').innerHTML = svg(retrato(turno.receita, expr), 80, anim)
   $('#fala').textContent = fala
 }
 

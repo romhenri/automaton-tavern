@@ -370,7 +370,7 @@ const CANECA: Layer = [
 const ESPUMA: Layer = ['................', '...ff.f.ff......', '..kfffffffk.....', '..kLLLLLLLk.....']
 const FUMACA: Layer = ['....s...s.......', '...s..s..s......', '..kLLLLLLLk.....', '..kLlLLlLLk.....']
 export type Conteudo = 'vazia' | 'cheia' | 'estragada'
-const MADEIRA = { n: '#9c6a2f', N: '#c88a4a', i: '#8a8f99', k: '#d8a050' } // contorno de latão: preto some no fundo escuro
+const MADEIRA = { n: '#9c6a2f', N: '#c88a4a', i: '#8a8f99', k: '#5a3a18' } // contorno marrom escuro: preto some no fundo escuro
 export const canecaSprite = (c: Conteudo) => {
   if (c === 'vazia') return compose([CANECA], { ...MADEIRA, L: '#1b1410' })
   if (c === 'cheia') return compose([CANECA, ESPUMA], { ...MADEIRA, L: '#e8a02a', f: '#fff6e0' })

@@ -430,7 +430,7 @@ export const RECEITAS: Receita[] = [
     oficio: 'Mestre',
     // as cores do Borin, com barba curta e sem picareta
     visual: { cabelo: '#f0f0e8', pele: '#f0c8a0', barba: 'curta', roupa: '#7a6a5a' },
-    fala: 'Minhas formigas contam em binário: baga é 1, mel é 0. O número tem que ser divisível por 3. Fermente, e prove que pensa como uma colônia.',
+    fala: 'Minhas formigas contam em binário: baga é 1, mel é 0. Divisível por 3, e fermente.',
     conceito: 'Divisibilidade por 3 (binário)',
     // r0/r1/r2 = resto do número lido até agora; cada dígito d leva r a (2r + d) mod 3
     afd: {
