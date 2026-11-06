@@ -126,18 +126,21 @@ const SEM_BARBA: Layer = [
   '...kccck',
   '', '',
 ]
+const BARBA_CURTA: Layer = top(['', '', '', '', '', '', '', '..kBbbbb', '.kcckBbb', 'ksccckbb'])
 const BIGODE: Layer = top(['', '', '', '', '', '', '', '.....bbb', '.......b', '.......B'])
 const CABELO_LONGO: Layer = top(['', '', '', '.khhhhhh', 'khh.....', 'khh.....', 'khh.....', 'khh.....', 'kh......', 'kh......', 'kh......', '.k......'])
 const CACHOS: Layer = top(['...k.k.k', '..khkhkh', '.khhhhhh'])
+const FRANJA: Layer = top(['', '', '', '', '..khhhhh'])
 const OCULOS: Layer = top(['', '', '', '', '....ooo.', '....o.oo', '....ooo.']) // armação prateada, aparece em cabelo escuro
 
 export type Visual = {
   cabelo?: string
   pele?: string
   roupa?: string
-  barba?: 'cheia' | 'bigode' | 'nenhuma'
+  barba?: 'cheia' | 'curta' | 'bigode' | 'nenhuma'
   longo?: boolean
   cachos?: boolean
+  franja?: boolean
   oculos?: boolean
 }
 
@@ -148,15 +151,17 @@ export function dwarfSprite(name: string, profession: string, expr: Expressao = 
   const beard = v.cabelo ?? pick(BEARD)
   const skin = v.pele ?? pick(SKIN)
   const pal: Pal = {
-    h: shade(beard, 0.85), b: beard, B: shade(beard, 0.7), s: expr === 'bravo' ? '#d8604a' : skin, S: '#c08a6a',
+    h: shade(beard, 0.85), b: beard, B: shade(beard, 0.7), s: expr === 'bravo' ? '#d8604a' : skin, S: v.pele ? shade(v.pele, 0.8) : '#c08a6a',
     e: expr === 'bravo' ? '#ff3b2f' : '#1b1410', c: v.roupa ?? CLOTH[profession] ?? '#7a6a5a', l: '#3a2a18', d: '#3a2a18',
     m: '#9aa0aa', M: '#d8dce4',
   }
   const layers = [DWARF]
-  if (v.barba === 'nenhuma' || v.barba === 'bigode') layers.push(SEM_BARBA)
+  if (v.barba && v.barba !== 'cheia') layers.push(SEM_BARBA)
+  if (v.barba === 'curta') layers.push(BARBA_CURTA)
   if (v.barba === 'bigode') layers.push(BIGODE)
   if (v.longo) layers.push(CABELO_LONGO)
   if (v.cachos) layers.push(CACHOS)
+  if (v.franja) layers.push(FRANJA)
   if (MILITARY.has(profession)) layers.push(HELMET)
   const tool = TOOL_OF[profession]
   if (tool) layers.push(TOOL[tool])
@@ -365,7 +370,7 @@ const CANECA: Layer = [
 const ESPUMA: Layer = ['................', '...ff.f.ff......', '..kfffffffk.....', '..kLLLLLLLk.....']
 const FUMACA: Layer = ['....s...s.......', '...s..s..s......', '..kLLLLLLLk.....', '..kLlLLlLLk.....']
 export type Conteudo = 'vazia' | 'cheia' | 'estragada'
-const MADEIRA = { n: '#9c6a2f', N: '#c88a4a', i: '#8a8f99' }
+const MADEIRA = { n: '#9c6a2f', N: '#c88a4a', i: '#8a8f99', k: '#d8a050' } // contorno de latão: preto some no fundo escuro
 export const canecaSprite = (c: Conteudo) => {
   if (c === 'vazia') return compose([CANECA], { ...MADEIRA, L: '#1b1410' })
   if (c === 'cheia') return compose([CANECA, ESPUMA], { ...MADEIRA, L: '#e8a02a', f: '#fff6e0' })
