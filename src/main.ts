@@ -147,6 +147,7 @@ function jogo() {
         <button class="btn" data-cmd="desfazer" title="Desfazer (Backspace)" aria-label="Desfazer">${svg(VOLTAR, 16)}</button>
         <button class="btn" data-cmd="esvaziar" title="Esvaziar (Esc)" aria-label="Esvaziar">${svg(LIXEIRA, 16)}</button>
         <button class="btn btn-gold" data-cmd="servir">Servir</button>
+        <button class="btn fases" data-ir="fases">Fases</button>
       </div>
     </section>`
   anao('neutro', r.fala)
@@ -188,6 +189,23 @@ function fim() {
 
 // ---------------------------------------------------------------- jogo
 
+/** Lista de clientes para pular direto para uma fase. */
+function fases() {
+  const div = document.createElement('div')
+  div.className = 'cortina'
+  div.innerHTML = `
+    <div class="painel lista-fases">
+      <h2 class="painel-titulo">Fases</h2>
+      ${RECEITAS.map((r, i) => `
+        <button class="btn fase${i === nivel ? ' ativa' : ''}" data-ir="nivel" data-pag="${i}">
+          ${svg(dwarfSprite(r.cliente, r.oficio), 24)}<span>${i + 1}. ${r.cliente}</span><small class="muted">${r.nome}</small>
+        </button>`).join('')}
+      <button class="btn" data-ir="fechar">Fechar</button>
+    </div>`
+  palco.append(div)
+  div.querySelector<HTMLElement>('.fase.ativa')!.focus()
+}
+
 function anao(expr: Expressao, fala: string, anim = '') {
   $('#anao').innerHTML = svg(dwarfSprite(turno.receita.cliente, turno.receita.oficio, expr), 96, anim)
   $('#fala').textContent = fala
@@ -223,7 +241,12 @@ function comando(cmd: string) {
   atualiza()
 }
 
-const TELAS: Record<string, (pag: number) => void> = { jogar: jogo, ajuda, almanaque, titulo, fim, proximo: () => (nivel++, jogo()) }
+const TELAS: Record<string, (pag: number) => void> = {
+  jogar: jogo, ajuda, almanaque, titulo, fim, fases,
+  proximo: () => (nivel++, jogo()),
+  nivel: (i) => ((nivel = i), jogo()),
+  fechar: () => palco.querySelector('.cortina')?.remove(),
+}
 
 palco.addEventListener('click', (e) => {
   const el = (e.target as HTMLElement).closest<HTMLElement>('[data-s],[data-cmd],[data-ir]')
