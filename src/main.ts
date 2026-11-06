@@ -83,16 +83,16 @@ function almanaque(pag = 0) {
   palco.innerHTML = `
     <nav class="abas">
       <h2 class="painel-titulo">Almanaque</h2>
+      <button class="btn btn-gold" data-ir="titulo">Voltar</button>
       ${aba(0, `${svg(icone('m'), 24)}<span>Ingredientes e ações</span>`)}
       ${RECEITAS.map((x, i) => aba(i + 1, `${svg(retrato(x), 24)}<span>${x.cliente}</span>`)).join('')}
-      <button class="btn btn-gold" data-ir="titulo">Voltar</button>
     </nav>
     <article class="painel pagina">${r ? `
       <header class="ficha">
         ${svg(retrato(r), 64)}
         <div>
-          <h2>${r.nome}</h2>
-          <p class="muted">Pedido de <span class="ouro">${r.cliente}</span> · ${r.conceito}</p>
+          <h2>${r.cliente}</h2>
+          <p class="muted">Pede <span class="ouro">${r.nome}</span> · ${r.conceito}</p>
           <p>"${r.fala}"</p>
         </div>
       </header>
@@ -197,11 +197,11 @@ function fases() {
   div.innerHTML = `
     <div class="painel lista-fases">
       <h2 class="painel-titulo">Fases</h2>
+      <button class="btn btn-gold" data-ir="fechar">Voltar</button>
       ${RECEITAS.map((r, i) => `
         <button class="btn fase${i === nivel ? ' ativa' : ''}" data-ir="nivel" data-pag="${i}">
           ${svg(retrato(r), 24)}<span>${i + 1}. ${r.cliente}</span><small class="muted">${r.nome}</small>
         </button>`).join('')}
-      <button class="btn" data-ir="fechar">Fechar</button>
     </div>`
   palco.append(div)
   div.querySelector<HTMLElement>('.fase.ativa')!.focus()

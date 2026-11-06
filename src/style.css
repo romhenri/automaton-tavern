@@ -97,7 +97,8 @@ button { font: inherit; color: inherit; }
 .aba { justify-content: flex-start; padding: 1px 6px; text-align: left; line-height: 1; }
 .aba span { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .aba.ativa { background: linear-gradient(#5a4a30, #3a2e1f); color: var(--gold); }
-.abas .btn-gold, .lista-fases > .btn:last-child { position: sticky; bottom: 0; margin-top: auto; } /* Voltar/Fechar sempre à mão */
+.abas .btn-gold, .lista-fases > .btn-gold { position: sticky; top: 0; z-index: 1; } /* Voltar sempre à mão */
+.lista-fases > .btn-gold { top: -14px; } /* encosta na borda do painel, sem deixar a lista aparecer acima */
 .pagina { display: grid; grid-template-rows: auto 1fr; gap: 8px; overflow-y: auto; }
 .ficha { display: flex; gap: 10px; align-items: center; }
 .ficha h2 { color: var(--gold); font-size: 1.3em; }
