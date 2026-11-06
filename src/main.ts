@@ -3,7 +3,7 @@ import { ERRO, executar } from './afd.ts'
 import { grafo } from './grafo.ts'
 import { CAPACIDADE, DRINKS, PACIENCIA, novoTurno, servir, type Turno, type Veredito } from './jogo.ts'
 import { ALFABETO, RECEITAS, type Receita } from './receitas.ts'
-import { BARRIL, LIXEIRA, VOLTAR, canecaSprite, dwarfSprite, icone, svg, type Expressao } from './sprites.ts'
+import { BARRIL, LIXEIRA, PEPITA, VOLTAR, canecaSprite, dwarfSprite, icone, svg, type Expressao } from './sprites.ts'
 
 const REACAO: Record<Veredito, { fala: string; cara: Expressao; anim: string }> = {
   novo: { fala: '*glub glub* Ahh! Isso sim!', cara: 'feliz', anim: 'bebe' },
@@ -21,6 +21,8 @@ let cadeia: string[] = []
 
 const $ = <T extends HTMLElement>(sel: string) => palco.querySelector<T>(sel)!
 const retrato = (r: Receita, expr: Expressao = 'neutro') => dwarfSprite(r.cliente, r.oficio, expr, r.visual)
+/** Quantia em ouro, com a pepita no lugar do símbolo de moeda. */
+const ouro = (n: number) => `${svg(PEPITA, 14, 'pepita')}${n}`
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`)
 
 // Resolução base 320x180 em dobro (640x360), escalada por inteiro.
@@ -44,7 +46,7 @@ function titulo() {
         <button class="btn" data-ir="almanaque">Almanaque</button>
         <button class="btn" data-ir="ajuda">Como jogar</button>
       </div>
-      <p class="muted small">Moedas ☼${moedas} · Reputação ${reputacao}</p>
+      <p class="muted small">Moedas ${ouro(moedas)} · Reputação ${reputacao}</p>
     </div>`
 }
 
@@ -168,7 +170,7 @@ function fimTurno() {
       <h2 class="painel-titulo">${ok ? 'Cliente satisfeito!' : 'Cliente foi embora bravo!'}</h2>
       ${svg(retrato(turno.receita, ok ? 'feliz' : 'bravo'), 96)}
       <p>"${ok ? 'Que taverna! Volto amanhã.' : 'Chega! Vou beber com os elfos!'}"</p>
-      <p>Moedas no turno: <b class="ouro">☼${turno.moedas}</b> · Total: <b class="ouro">☼${moedas}</b></p>
+      <p>Moedas no turno: <b class="ouro">${ouro(turno.moedas)}</b> · Total: <b class="ouro">${ouro(moedas)}</b></p>
       <p>Reputação: <b class="${ok ? 'verde' : 'vermelho'}">${reputacao} (${ok ? '+1' : '-1'})</b></p>
       <button class="btn btn-gold" data-ir="${ultimo ? 'fim' : 'proximo'}">${ultimo ? 'Fechar a taverna' : 'Próximo cliente'}</button>
     </div>`
@@ -182,7 +184,7 @@ function fim() {
     <div class="titulo">
       <h1>Fim de expediente</h1>
       <p>Você serviu todos os clientes da noite.</p>
-      <p>Moedas <b class="ouro">☼${moedas}</b> · Reputação <b>${reputacao}</b></p>
+      <p>Moedas <b class="ouro">${ouro(moedas)}</b> · Reputação <b>${reputacao}</b></p>
       <button class="btn btn-gold" data-ir="titulo">Voltar ao início</button>
     </div>`
   nivel = 0
@@ -223,7 +225,7 @@ function atualiza() {
   $('#estado').innerHTML = `Estado: <b class="${aceita ? 'verde' : final === ERRO ? 'vermelho' : ''}">${final}${aceita ? ' ✔' : ''}</b>`
   $('#historico').innerHTML = Array.from({ length: DRINKS }, (_, i) =>
     turno.servidos[i] ? `<span class="servido">${turno.servidos[i].cadeia} ✔</span>` : '<span class="servido vazio">?</span>').join('')
-  $('#status').innerHTML = `Paciência ${'<span class="coracao">♥</span>'.repeat(PACIENCIA - turno.rejeitados)}${'<span class="coracao perdido">♥</span>'.repeat(turno.rejeitados)} · <span class="ouro">☼${moedas + turno.moedas}</span>`
+  $('#status').innerHTML = `Paciência ${'<span class="coracao">♥</span>'.repeat(PACIENCIA - turno.rejeitados)}${'<span class="coracao perdido">♥</span>'.repeat(turno.rejeitados)} · <span class="ouro">${ouro(moedas + turno.moedas)}</span>`
   palco.querySelectorAll<HTMLButtonElement>('[data-s]').forEach((b) => (b.disabled = cadeia.length >= CAPACIDADE))
   $<HTMLButtonElement>('[data-cmd=servir]').disabled = cadeia.length === 0
 }

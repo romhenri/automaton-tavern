@@ -31,6 +31,7 @@ button { font: inherit; color: inherit; }
 .muted { color: var(--muted); }
 .small { font-size: .85em; }
 .ouro { color: var(--gold); }
+.pepita { display: inline-block; vertical-align: -2px; margin-right: 1px; }
 .verde { color: var(--green); }
 .vermelho { color: var(--red); }
 .linha { display: flex; gap: 6px; justify-content: center; }

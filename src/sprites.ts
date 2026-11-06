@@ -418,3 +418,24 @@ export const LIXEIRA = compose([[
   '........',
   '........',
 ]], { g: '#7a7f8a', G: '#c8ccd4' })
+
+// ---------------------------------------------------------------- pepita de ouro (a moeda da taverna)
+
+export const PEPITA = compose([[
+  '................',
+  '................',
+  '................',
+  '.....kkkk.......',
+  '....kyYyyk......',
+  '...kyYYyyykk....',
+  '..kyyYyyyyyyk...',
+  '..kyyyyyyyoyyk..',
+  '.kyyyyyyyooyyk..',
+  '.kyyoyyyyyyyyk..',
+  '.kyooyyyyyyyk...',
+  '..kyyyyyyoook...',
+  '...kkooooookk...',
+  '.....kkkkkk.....',
+  '................',
+  '................',
+]], { y: '#f0c040', Y: '#fff0a0', o: '#a87418' })
