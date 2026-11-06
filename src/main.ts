@@ -124,7 +124,7 @@ function jogo() {
   palco.className = 'tela-jogo'
   palco.innerHTML = `
     <section class="quadro" aria-label="Quadro da receita">
-      <h2>${r.nome} <small>nível ${nivel + 1}${r.bonus ? ' (bônus)' : ''} · ${r.conceito}</small></h2>
+      <h2>${r.nome} <small>nível ${nivel + 1}${r.chefe ? ' (chefe final)' : r.bonus ? ' (bônus)' : ''} · ${r.conceito}</small></h2>
       <div id="grafo"></div>
     </section>
     <section class="cliente" aria-live="polite">

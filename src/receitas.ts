@@ -31,6 +31,8 @@ export type Receita = {
   /** Desenha qx no quadro (só faz sentido quando ele importa, como no complemento). */
   mostrarErro?: boolean
   bonus?: boolean
+  /** Chefe final: a última fase. */
+  chefe?: boolean
   /** Personalidade: falas próprias por veredito, no lugar das padrão. */
   falas?: Partial<Record<'novo' | 'repetido' | 'incompleto' | 'erro', string>>
   exemplos: { aceitas: string[]; rejeitadas: string[] }
@@ -186,6 +188,31 @@ export const RECEITAS: Receita[] = [
     },
   },
   {
+    id: 'nobre',
+    nome: 'Selo Real',
+    cliente: 'Lari Nobre',
+    oficio: 'Noble',
+    visual: { cabelo: '#5a3a1a', pele: '#fbe6d4', barba: 'nenhuma', longo: true, franja: true, roupa: '#b0242a' },
+    fala: 'Uma dama exige o selo real: bagas, mel e bagas, uma atrás da outra. O resto é enfeite. Fermente para servir.',
+    conceito: 'Busca de padrão (contém bmb)',
+    // q0..q3 = quanto do selo bmb já apareceu; errar no meio volta para onde o prefixo ainda serve
+    afd: {
+      estados: ['q0', 'q1', 'q2', 'q3', 'q4'],
+      inicial: 'q0',
+      finais: ['q4'],
+      delta: {
+        q0: { b: 'q1', m: 'q0', c: 'q0' },
+        q1: { b: 'q1', m: 'q2', c: 'q0' },
+        q2: { b: 'q3', m: 'q0', c: 'q0' },
+        q3: { b: 'q3', m: 'q3', c: 'q3', F: 'q4' },
+      },
+    },
+    bonus: true,
+    falas: { incompleto: 'Cadê o selo? Bagas, mel, bagas. Em sequência.', erro: 'Que vulgar! Sem selo real não se fermenta.', novo: 'Digno da realeza!' },
+    layout: { q0: [36, 88], q1: [90, 44], q2: [150, 44], q3: [170, 88], q4: [222, 88] },
+    exemplos: { aceitas: ['bmbF', 'cbmbF', 'bbmbF', 'bmbmcF'], rejeitadas: ['bmF', 'bmcbF', 'bmb', 'bmmbF'] },
+  },
+  {
     id: 'trapacas',
     nome: 'Trapaça de Cogumelo',
     cliente: 'Arthur das Trapaças',
@@ -233,6 +260,30 @@ export const RECEITAS: Receita[] = [
     falas: { incompleto: 'Cadê o outro? Mel E bagas, querido.', novo: 'Ahh, agora sim tá aceso!' },
     layout: { q0: [36, 65], q1: [100, 42], q2: [100, 88], q3: [164, 65], q4: [220, 65] },
     exemplos: { aceitas: ['mbA', 'bmA', 'mmbbA'], rejeitadas: ['mmA', 'mbB', 'Amb'] },
+  },
+  {
+    id: 'moderado',
+    nome: 'Cogumelo Moderado',
+    cliente: 'Barios',
+    oficio: 'Trapaceiro',
+    visual: { cabelo: '#3a3030', barba: 'cheia', oculos: true, roupa: '#6a2a4a' },
+    fala: 'Meu irmão Arthur exagera. Eu sou moderado: no máximo dois cogumelos. Cevada à vontade, mexe no fim.',
+    conceito: 'Contagem máxima (no máximo 2)',
+    // q0..q2 = cogumelos até agora; o terceiro g cai em qx
+    afd: {
+      estados: ['q0', 'q1', 'q2', 'q3'],
+      inicial: 'q0',
+      finais: ['q3'],
+      delta: {
+        q0: { g: 'q1', c: 'q0', M: 'q3' },
+        q1: { g: 'q2', c: 'q1', M: 'q3' },
+        q2: { c: 'q2', M: 'q3' },
+      },
+    },
+    bonus: true,
+    falas: { incompleto: 'Mexe no final, por favor. Com moderação.', erro: 'Cogumelo demais! Isso é coisa do Arthur.', novo: 'Na medida certa.' },
+    layout: { q0: [36, 42], q1: [110, 42], q2: [184, 42], q3: [110, 104] },
+    exemplos: { aceitas: ['M', 'gM', 'gcgM', 'cgcM'], rejeitadas: ['gggM', 'gg', 'gMc'] },
   },
   {
     id: 'comprido',
@@ -297,5 +348,106 @@ export const RECEITAS: Receita[] = [
     falas: { incompleto: 'Morno! Faltou fogo, conta de três em três.', erro: 'Cadê o cogumelo? E isso queimou meus bigodes de rato!', novo: '*squeak* Quentinho no ponto!' },
     layout: { q0: [36, 100], q1: [36, 42], q2: [110, 42], q3: [184, 42], q4: [147, 88], q5: [90, 104] },
     exemplos: { aceitas: ['gAAAM', 'gcAAAM', 'gAcAAM', 'gAAAAAAM'], rejeitadas: ['AAAM', 'gAAM', 'gAAAAM', 'gAAAMA'] },
+  },
+  {
+    id: 'pontes',
+    nome: 'Ponte de Khazad',
+    cliente: 'Mariana, Faz Pontes',
+    oficio: 'Engineer',
+    visual: { cabelo: '#a87040', pele: '#fbe6d4', barba: 'nenhuma', longo: true, roupa: '#2a5a9a' },
+    fala: 'Eu faço pontes: um Hidromel de um lado, uma Cerveja Negra do outro. A batida liga os dois.',
+    conceito: 'Concatenação (Hidromel · Cerveja)',
+    // q0..q2 é o Hidromel (m+B), q2..q4 é a Cerveja (c(c|m)*F): a aresta c de q2 é a ponte
+    afd: {
+      estados: ['q0', 'q1', 'q2', 'q3', 'q4'],
+      inicial: 'q0',
+      finais: ['q4'],
+      delta: {
+        q0: { m: 'q1' },
+        q1: { m: 'q1', B: 'q2' },
+        q2: { c: 'q3' },
+        q3: { c: 'q3', m: 'q3', F: 'q4' },
+      },
+    },
+    bonus: true,
+    falas: { incompleto: 'A ponte tá pela metade! Falta chegar do outro lado.', erro: 'Essa ponte desabou. Hidromel primeiro, depois cevada.', novo: 'Ponte firme, de margem a margem!' },
+    layout: { q0: [36, 70], q1: [84, 70], q2: [132, 70], q3: [180, 70], q4: [222, 70] },
+    exemplos: { aceitas: ['mBcF', 'mmBcF', 'mBcmF', 'mBccmF'], rejeitadas: ['mBF', 'cF', 'mBc', 'mcBF'] },
+  },
+  {
+    id: 'papagaios',
+    nome: 'Eco de Papagaio',
+    cliente: 'Gui dos Papagaios',
+    oficio: 'Animal Trainer',
+    visual: { cabelo: '#2a2020', pele: '#5a3420', barba: 'nenhuma', roupa: '#2a9a4a' },
+    fala: 'Meus papagaios repetem tudo! Cada fruta duas vezes seguidas: bactris ou bagas. Quantas duplas quiser.',
+    conceito: 'Lembrar o último símbolo (pares)',
+    // qt/qb lembram a fruta que espera o eco; q1 = dupla fechada (final)
+    afd: {
+      estados: ['q0', 'qt', 'qb', 'q1'],
+      inicial: 'q0',
+      finais: ['q1'],
+      delta: {
+        q0: { t: 'qt', b: 'qb' },
+        qt: { t: 'q1' },
+        qb: { b: 'q1' },
+        q1: { t: 'qt', b: 'qb' },
+      },
+    },
+    bonus: true,
+    falas: { incompleto: 'Cadê o eco? O papagaio ficou esperando!', erro: 'Croc! Papagaio não repete isso não!', novo: 'Croc! Croc! Isso! Isso!' },
+    layout: { q0: [36, 65], qt: [110, 16], qb: [110, 114], q1: [216, 65] },
+    exemplos: { aceitas: ['tt', 'bbtt', 'ttbbtt', 'bbbb'], rejeitadas: ['t', 'tb', 'ttb', 'mm'] },
+  },
+  {
+    id: 'scarlett',
+    nome: 'Brasa Escarlate',
+    cliente: 'Scarlett',
+    oficio: 'Dancer',
+    visual: { cabelo: '#d8281a', pele: '#f2d0b0', barba: 'nenhuma', longo: true, roupa: '#8a1424' },
+    fala: 'Coloque o que quiser, querido. Só não esqueça: termina com bagas na brasa.',
+    conceito: 'Sufixo (termina com bA)',
+    // q1 = acabou de pôr bagas, q2 = bagas e logo brasa (final); continuar mexe na trilha
+    afd: {
+      estados: ['q0', 'q1', 'q2'],
+      inicial: 'q0',
+      finais: ['q2'],
+      delta: {
+        q0: { b: 'q1', m: 'q0', A: 'q0' },
+        q1: { b: 'q1', m: 'q0', A: 'q2' },
+        q2: { b: 'q1', m: 'q0', A: 'q0' },
+      },
+    },
+    bonus: true,
+    falas: { incompleto: 'Quase, querido. O final é bagas na brasa.', erro: 'Isso nem é vermelho!', novo: 'Escarlate como meu cabelo!' },
+    layout: { q0: [40, 86], q1: [120, 44], q2: [200, 86] },
+    exemplos: { aceitas: ['bA', 'mbA', 'bAbA', 'AbbA'], rejeitadas: ['b', 'bAm', 'bAA', 'Ab'] },
+  },
+  {
+    id: 'formigas',
+    nome: 'Colônia Binária',
+    cliente: 'Mestre das Formigas',
+    oficio: 'Mestre',
+    // as cores do Borin, com barba curta e sem picareta
+    visual: { cabelo: '#f0f0e8', pele: '#f0c8a0', barba: 'curta', roupa: '#7a6a5a' },
+    fala: 'Minhas formigas contam em binário: baga é 1, mel é 0. O número tem que ser divisível por 3. Fermente, e prove que pensa como uma colônia.',
+    conceito: 'Divisibilidade por 3 (binário)',
+    // r0/r1/r2 = resto do número lido até agora; cada dígito d leva r a (2r + d) mod 3
+    afd: {
+      estados: ['q0', 'r0', 'r1', 'r2', 'qF'],
+      inicial: 'q0',
+      finais: ['qF'],
+      delta: {
+        q0: { m: 'r0', b: 'r1' },
+        r0: { m: 'r0', b: 'r1', F: 'qF' },
+        r1: { m: 'r2', b: 'r0' },
+        r2: { m: 'r1', b: 'r2' },
+      },
+    },
+    bonus: true,
+    chefe: true,
+    falas: { incompleto: 'Sobrou resto! A colônia não aceita.', erro: 'Formiga não lê isso. Só baga, mel e fermento.', novo: 'A colônia aprova. Você conta como nós.' },
+    layout: { qF: [36, 30], q0: [36, 100], r0: [100, 44], r1: [156, 100], r2: [212, 44] },
+    exemplos: { aceitas: ['bbF', 'bbmF', 'bmmbF', 'mF', 'bbbbF'], rejeitadas: ['bF', 'bmF', 'bmbF', 'bb'] },
   },
 ]

@@ -56,6 +56,17 @@ describe('receitas', () => {
     expect(new Set(classe.values()).size).toBe(estados.length)
   })
 
+  it('Rômulo fica fixo na fase 12, Lari na 8 e Barios na 11', () => {
+    expect(RECEITAS[11].cliente).toBe('Rômulo, o Comprido')
+    expect(RECEITAS[7].cliente).toBe('Lari Nobre')
+    expect(RECEITAS[10].cliente).toBe('Barios')
+  })
+
+  it('o Mestre das Formigas é o chefe final: última fase', () => {
+    expect(RECEITAS.at(-1)!.cliente).toBe('Mestre das Formigas')
+    expect(RECEITAS.filter((r) => r.chefe)).toHaveLength(1)
+  })
+
   it('Gabi dos Teclados tem mais estados que qualquer outro anão', () => {
     const gabi = RECEITAS.find((r) => r.cliente === 'Gabi dos Teclados')!
     for (const r of RECEITAS) if (r !== gabi) expect(gabi.afd.estados.length).toBeGreaterThan(r.afd.estados.length)
