@@ -189,7 +189,7 @@ const COMANDOS = { desfazer: 1, esvaziar: 1, servir: 1 }
 addEventListener('keydown', (e) => {
   if (palco.className !== 'tela-jogo' || e.ctrlKey || e.metaKey || e.altKey) return
   const cmd = TECLA[e.key] ?? e.key
-  if ((e.target as HTMLElement).closest('.cortina')) return // Enter no resumo aperta o botão dele
+  if (document.activeElement?.closest('.cortina')) return // Enter no resumo aperta o botão dele
   if (cmd in COMANDOS || ALFABETO.some((a) => a.s === cmd)) {
     e.preventDefault()
     comando(cmd)
