@@ -40,6 +40,7 @@ function titulo() {
       <p class="muted">Cada receita é um AFD. Cada drink, uma cadeia.</p>
       <div class="linha">
         <button class="btn btn-gold" data-ir="jogar">Jogar</button>
+        <button class="btn" data-ir="almanaque">Almanaque</button>
         <button class="btn" data-ir="ajuda">Como jogar</button>
       </div>
       <p class="muted small">Moedas ☼${moedas} · Reputação ${reputacao}</p>
@@ -64,6 +65,53 @@ function ajuda() {
       <p class="muted small">Teclado: letras montam, Backspace desfaz, Esc esvazia, Enter serve.</p>
       <button class="btn btn-gold" data-ir="titulo">Voltar</button>
     </div>`
+}
+
+/** Cadeia desenhada com os ícones do balcão. */
+const tira = (w: string) => `<span class="tira" title="${w}">${[...w].map((s) => svg(icone(s), 12)).join('')}<code>${w}</code></span>`
+
+function almanaque(pag = 0) {
+  const r = RECEITAS[pag - 1] // página 0 é a de ingredientes
+  const aba = (i: number, conteudo: string) =>
+    `<button class="btn aba${i === pag ? ' ativa' : ''}" data-ir="almanaque" data-pag="${i}">${conteudo}</button>`
+  const motivo = (w: string) => {
+    const { final } = executar(r.afd, [...w])
+    return final === ERRO ? 'estraga (qx)' : `para em ${final}`
+  }
+  palco.className = 'tela-almanaque'
+  palco.innerHTML = `
+    <nav class="abas">
+      <h2 class="painel-titulo">Almanaque</h2>
+      ${aba(0, `${svg(icone('m'), 24)}<span>Ingredientes e ações</span>`)}
+      ${RECEITAS.map((x, i) => aba(i + 1, `${svg(dwarfSprite(x.cliente, x.oficio), 24)}<span>${x.cliente}</span>`)).join('')}
+      <button class="btn btn-gold" data-ir="titulo">Voltar</button>
+    </nav>
+    <article class="painel pagina">${r ? `
+      <header class="ficha">
+        ${svg(dwarfSprite(r.cliente, r.oficio), 64)}
+        <div>
+          <h2>${r.nome}</h2>
+          <p class="muted">Pedido de <span class="ouro">${r.cliente}</span> · ${r.conceito}</p>
+          <p>"${r.fala}"</p>
+        </div>
+      </header>
+      <div class="corpo">
+        <div class="quadro mini">${grafo(r, [])}</div>
+        <div class="exemplos">
+          <h3 class="verde">Aceitas ✔</h3>
+          ${r.exemplos.aceitas.map(tira).join('')}
+          <h3 class="vermelho">Rejeitadas ✘</h3>
+          ${r.exemplos.rejeitadas.map((w) => `<div title="${motivo(w)}">${tira(w)} <small class="muted">→ ${executar(r.afd, [...w]).final}</small></div>`).join('')}
+        </div>
+      </div>` : `
+      <h2 class="painel-titulo">Ingredientes e ações</h2>
+      <div class="ingredientes">${ALFABETO.map((a) => `
+        <div class="ingrediente">${svg(icone(a.s), 32)}
+          <div><b><kbd>${a.s}</kbd> ${a.nome}</b> <small class="muted">${a.acao ? 'ação' : 'ingrediente'}</small><p class="muted small">${a.sabor}</p></div>
+        </div>`).join('')}
+      </div>`}
+    </article>`
+  palco.querySelector('.aba.ativa')?.scrollIntoView({ block: 'nearest' })
 }
 
 function jogo() {
@@ -175,14 +223,14 @@ function comando(cmd: string) {
   atualiza()
 }
 
-const TELAS: Record<string, () => void> = { jogar: jogo, ajuda, titulo, fim, proximo: () => (nivel++, jogo()) }
+const TELAS: Record<string, (pag: number) => void> = { jogar: jogo, ajuda, almanaque, titulo, fim, proximo: () => (nivel++, jogo()) }
 
 palco.addEventListener('click', (e) => {
   const el = (e.target as HTMLElement).closest<HTMLElement>('[data-s],[data-cmd],[data-ir]')
   if (!el) return
   if (el.dataset.s) comando(el.dataset.s)
   else if (el.dataset.cmd) comando(el.dataset.cmd)
-  else TELAS[el.dataset.ir!]?.()
+  else TELAS[el.dataset.ir!]?.(Number(el.dataset.pag ?? 0))
 })
 
 const TECLA: Record<string, string> = { Backspace: 'desfazer', Escape: 'esvaziar', Enter: 'servir' }
