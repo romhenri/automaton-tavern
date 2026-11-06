@@ -341,3 +341,43 @@ export const canecaSprite = (c: Conteudo) => {
 }
 
 export const BARRIL = ICONES.F
+
+// ---------------------------------------------------------------- comandos do balcão
+
+export const VOLTAR = compose([[
+  '................',
+  '.....k..........',
+  '....kwk.........',
+  '...kwwkkkkkk....',
+  '..kwwwwwwwwwk...',
+  '...kwwkkkkkwwk..',
+  '....kwk....kwwk.',
+  '.....k......kwk.',
+  '............kwk.',
+  '............kwk.',
+  '...........kwwk.',
+  '....kkkkkkkwwk..',
+  '....kwwwwwwwk...',
+  '....kkkkkkkk....',
+  '................',
+  '................',
+]], { w: '#e9dcc4' })
+
+export const LIXEIRA = compose([[
+  '........',
+  '......kk',
+  '.....k..',
+  '.kkkkkkk',
+  'kGGGGGGG',
+  '.kkkkkkk',
+  '..kgGgkg',
+  '..kgGgkg',
+  '..kgGgkg',
+  '..kgGgkg',
+  '..kgGgkg',
+  '..kgGgkg',
+  '..kggggg',
+  '...kkkkk',
+  '........',
+  '........',
+]], { g: '#7a7f8a', G: '#c8ccd4' })

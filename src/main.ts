@@ -3,7 +3,7 @@ import { ERRO, executar } from './afd.ts'
 import { grafo } from './grafo.ts'
 import { CAPACIDADE, DRINKS, PACIENCIA, novoTurno, servir, type Turno, type Veredito } from './jogo.ts'
 import { ALFABETO, RECEITAS } from './receitas.ts'
-import { BARRIL, canecaSprite, dwarfSprite, icone, svg, type Expressao } from './sprites.ts'
+import { BARRIL, LIXEIRA, VOLTAR, canecaSprite, dwarfSprite, icone, svg, type Expressao } from './sprites.ts'
 
 const REACAO: Record<Veredito, { fala: string; cara: Expressao; anim: string }> = {
   novo: { fala: '*glub glub* Ahh! Isso sim!', cara: 'feliz', anim: 'bebe' },
@@ -95,8 +95,9 @@ function jogo() {
       <div class="grupo">${ALFABETO.filter((a) => !a.acao).map(botao).join('')}</div>
       <div class="grupo acoes">${ALFABETO.filter((a) => a.acao).map(botao).join('')}</div>
       <div class="linha">
-        <button class="btn" data-cmd="desfazer">Desfazer</button>
-        <button class="btn" data-cmd="esvaziar">Esvaziar</button>
+        <button class="btn inicio" data-ir="titulo" title="O anão espera: Jogar volta para ele">⌂ Início</button>
+        <button class="btn" data-cmd="desfazer" title="Desfazer (Backspace)" aria-label="Desfazer">${svg(VOLTAR, 16)}</button>
+        <button class="btn" data-cmd="esvaziar" title="Esvaziar (Esc)" aria-label="Esvaziar">${svg(LIXEIRA, 16)}</button>
         <button class="btn btn-gold" data-cmd="servir">Servir</button>
       </div>
     </section>`
@@ -105,6 +106,7 @@ function jogo() {
 }
 
 function fimTurno() {
+  if (palco.className !== 'tela-jogo') return // saiu para o início antes do resumo
   const ok = turno.fim === 'satisfeito'
   reputacao += ok ? 1 : -1
   moedas += turno.moedas
