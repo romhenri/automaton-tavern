@@ -1,6 +1,7 @@
 import './style.css'
 import { ERRO, executar } from './afd.ts'
 import { grafo } from './grafo.ts'
+import { modoLivre } from './livre.ts'
 import { CAPACIDADE, DRINKS, PACIENCIA, novoTurno, servir, type Turno, type Veredito } from './jogo.ts'
 import { ALFABETO, RECEITAS, type Receita } from './receitas.ts'
 import { BARRIL, LIXEIRA, PEPITA, VOLTAR, canecaSprite, dwarfSprite, icone, svg, type Expressao } from './sprites.ts'
@@ -47,6 +48,20 @@ function titulo() {
         <button class="btn" data-ir="ajuda">Como jogar</button>
       </div>
       <p class="muted small">Moedas ${ouro(moedas)} · Reputação ${reputacao}</p>
+    </div>
+    <button class="secreto" data-ir="livre" title="Modo livre">${svg(icone('g'), 16)}Free Mode</button>`
+}
+
+/** Modo livre, passo 1: escolher com qual anão andar. */
+function escolha() {
+  palco.className = 'tela-ajuda'
+  palco.innerHTML = `
+    <div class="painel escolha">
+      <h2 class="painel-titulo">Escolha seu anão</h2>
+      <div class="grade">${RECEITAS.map((r, i) => `
+        <button class="btn" data-ir="andar" data-pag="${i}">${svg(retrato(r), 40)}<span>${r.cliente}</span></button>`).join('')}
+      </div>
+      <button class="btn btn-gold" data-ir="titulo">Voltar</button>
     </div>`
 }
 
@@ -246,6 +261,8 @@ function comando(cmd: string) {
 
 const TELAS: Record<string, (pag: number) => void> = {
   jogar: jogo, ajuda, almanaque, titulo, fim, fases,
+  livre: escolha,
+  andar: (i) => modoLivre(palco, i, retrato),
   proximo: () => (nivel++, jogo()),
   nivel: (i) => ((nivel = i), jogo()),
   fechar: () => palco.querySelector('.cortina')?.remove(),
