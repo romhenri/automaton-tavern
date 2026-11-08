@@ -19,6 +19,6 @@ it('todo anão está num piso livre, alcançável a partir da taverna', () => {
       if (andavel(...p) && !ocupado.has(String(p)) && !visto.has(String(p))) visto.add(String(p)), fila.push(p)
     }
   // bichos (P, G) ficam presos nos cercados: a taverna não chega neles
-  MAPA.forEach((l, y) => [...l].forEach((ch, x) => 'PG'.includes(ch) && expect(visto.has(String([x, y]))).toBe(false)))
+  MAPA.forEach((l, y) => [...l].forEach((ch, x) => 'PGh'.includes(ch) && expect(visto.has(String([x, y]))).toBe(false)))
   for (const [x, y] of lugares) expect([[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => visto.has(String([x + dx, y + dy])))).toBe(true)
 })
