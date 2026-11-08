@@ -4,85 +4,87 @@ import { BARRIL, PEPITA, compose, dwarfSprite, icone, type Grid } from './sprite
 
 // Um caractere por tile de 16x16. Gerado à mão: salas separadas por rocha, com portas.
 export const MAPA = [
-  '##o#14#2#o#3####################################',
-  '#......$....#xSHMXxSHMX#BpN+FFFpN+B#EEEErrrEEEE#',
-  '2.........$.1xxxxxxxxxx#pp++pppp++p#x^xxrrrxx^x#',
-  'o..6......$.3xxDxxxxDxx#ppppppppppp#xxxxrrrxxxx#',
-  '4.9.7........xxxxxxxxxx.pppIpppIppp.xxxxrrrxxxx#',
-  '#............xxxxxxxxxx.ppppppppppp.xxTxrrrxTxx#',
-  '#.........7.#xxxxxxxxxx#ppppppppppp#xxxxrrrxxxx#',
-  '1.5.....89..2xxDxxxxDxx#pppIpppIppp#xxxxrrrxxxx#',
-  '3....6......oxxxxxxxxxx#ppppppppppp#x^xxrrrxx^x#',
-  '#...........4xxxxxxxxxx#BpppppppppB#xxxxxxxxxxx#',
-  '#2#o#3..#14##############################..#####',
-  '#u,,,,,,,,,,,,u#BBwRORORORwrrrrr#BvEvEvB#tttttt#',
-  '#,c,,c,,c,,c,,,#Bwwwwwwwwwwrr!rr#vvvvvvv#tTtTtT#',
-  '#,c,,c,,c,,c,,,#wwAWAWAWAwwwwwww#vvvvvvv#tttttt#',
-  '#,c,,c,,c,,c,,,.wwwwwwwwwwww;;ww.vvvvvvv.tttttt#',
-  '#,c,,c,,c,,c,,,.ww;;;wwwwwww[+ww.vvvvvvv.tttttt#',
-  '#fffff,,,ffffff#ww]++ww;;;ww;;ww#v;;v;;v.tttttt#',
-  '#,,P,f,,,f,,,G,#ww;;;ww]++wwwwww#v[+v[+v#tttttt#',
-  '#,P,,f,,,f,G,,,#wwwwwww;;;wwwwww#vvvIvvv#tttttt#',
-  '#,,,,f,,,f,,G,,#wwwwwwwwwwwwwwBB#vvvvvvv#ttttEE#',
-  '######..####~#####..########..###########..#####',
-  '#,,l,,,,l,,~~~Yhhhhhhhhh#N+tttttN+#aaaaaaaaaaaa#',
-  '#,g,,g,,gu,~~~hhhhhhhhhh#++ttttt++#aoaQaaaaamaa#',
-  '#,,,,,,,z,,~~~hhh@h&h%hh#ttttttttt#aamaaaaaaoaa#',
-  '#,l,,,l,,l,~~~hhhhhhhhhh#tCtttttCt#aaaaaaaQaaaQ#',
-  '#,,g,,,g,,,~~~hhhhhhhhhh#ttttttttt#aaaaaaoaaaaa#',
-  '#Y,,,,,,l,,===hhhhhhhhhh#ttt]++ttt#aaQaaaaaaQaa#',
-  '#,,,l,,,,,,~~~hhhhffffff#ctt;t;ttB#aaaamaaaaama#',
-  '#,g,,g,,g,,~~~hhVhfhhhGh#btttttttB#aaaoaaaaaaaa#',
-  '#,,l,,l,,Y,~~~hhhhfhGhhh#Utttttttt#amaaaQaaQaoa#',
-  '#,Y,u,,u,,,~~~YuhhfhhPhh#EEtttttEE#aaaaaaaaaaaa#',
-  '#####..#########..######################..######',
-  '#YppppppppppppppppppppppppppppppppppppppppppppY#',
-  '#ppJ+ppppK+ppppZ+ppppJ+ppppK+ppppZ+ppppJ+pppppp#',
-  '#pp++pppp++pppp++pppp++pppp++pppp++pppp++pppppp#',
-  '#pppppppppppppppppppppppppppppppppppppppppppppp#',
-  '#ppppppppppppppppppppppp(+ppppppppppppppp(+pppp#',
-  '#puppppppppppppppppppppppppppppppppppppppppppup#',
-  '#pppppK+ppppZ+ppppJ+ppppK+ppppZ+ppppJ+ppppK+ppp#',
-  '#ppppp++pppp++pppp++pppp++pppp++pppp++pppp++ppp#',
-  '#pppppppppppppppppppppppppppppppppppppppppppppp#',
-  '#ppppppp(+ppppppppppppppppppppp(+pppppppppppppp#',
-  '#YppppppppppppppppppppppppppppppppppppppppppppY#',
-  '################################################',
-
+  '##############################################################################',
+  '#.5..6..$....9.#pBpN+FFFpN+Bpp#|||||||#EEEEEEEEEEEEEE#N+wwwN+w#EEEEErrrrEEEEE#',
+  '#.....7....$..7#ppp++pppp++ppp#sssssss#vvvvvvvvvvvvvv#++www++w#x^xxxrrrrxxx^x#',
+  '#5..6......$.8.#pppppppppppppp#s>s>s>s#vEEEvvvvvvEEEv#wCwwwCww#xxxxxrrrrxxxxx#',
+  '#..9.7.........pppppIpppIppppp#sssssss#vvvvvvvvvvvvvv#wwwwwwww#xxxxxrrrrxxxxx#',
+  '#..8........6..#pjpppppppppppp#ssCsCss#vvv;;;vv;;;vvv#ww]++www#xxTxxrrrrxxTxx#',
+  '#..7..5..8.7..6#pjppppppppppqq#sssssss#vvv]++vv]++vvv#cw;w;wBw#xxxxxrrrrxxxxx#',
+  '#..5.....895...#ypppIpppIppppp#s>sss>s#vvv;;;vv;;;vvv#bwwwwwBw#xxxxxrrrrxxxxx#',
+  '#9....6........#ppypppppppppqq#sssssss#vvvvvvvvvvvvvv#Uwwwwwww#x^xxxrrrrxxx^x#',
+  '#.9.7...5..6..8#pBpppppppppBpp#|sssss|#EEEvvvvvvvvEEE#EEwwwEEw#xxxxxxxxxxxxxx#',
+  '######################pp#########sss#######vv###########ww##########xxxx######',
+  '#ww}}ww<www<<ww#EE??EEvvEE??EE#uxxxxxxxxBxxxx#BBwRORORORwrrrrr#xSHMXxxxxSHMXx#',
+  '#wwwwwwwwwwwwww#vvvvvvvvvvvvvv#xxxxxxxxxxxxxx#Bwwwwwwwwwwrr!rr#xxxxxxxxxxxxxx#',
+  '#w{www{www{wwww#v*v*vvvvvv*v*v#x;;;xxxxxx;;;x#wwAWAWAWAwwwwwww#xxDxxxxDxxxDxx#',
+  '#wwwwwwwwwwwwwwwv;v;vvvvvv;v;vvx]++xxxxxx]++xwwwwwwwwwwwww;;ww#xxxxxxxxxxxxxx#',
+  '#wwwwwwwwwwwwww#vvvvvvvvvvvvvvvx;;;xx^xxx;;;xwww;;;wwwwwww[+ww#xxxxxxxxxxxxxx#',
+  '#w{www{www{wwww#v*v*vvvvvv*v*vvxx;;;xxxx;;;xx#ww]++ww;;;ww;;ww#xxxxxxxxxxxxxx#',
+  '#wwwwwwwwwwwwww#v;v;vvvvvv;v;v#xx]++xxxx]++xx#ww;;;ww]++wwwwww#xxDxxxxDxxxDxx#',
+  '#wwwwwwwwwwwwww#vvvvvvvvvvvvvv#xx;;;xxxx;;;xx#wwwwwww;;;wwwwww#xxxxxxxxxxxxxx#',
+  '#w<<w}}ww}}w<<w#??vvvvvvvvvv??#uxxxxxxxxxxxBu#wwwwwwwwwwwwwwBB#xxxxxxxxxxxxxx#',
+  '#######ww###########################xx####################ww########xxxx######',
+  '#,,,,l,,,,l,,,l,,,,,,,,,,,,,,,,,,,,,,,,,,~~~Y,,,,,,,,,,,,,,,,iii,,,,,,,,,,,,,#',
+  '#,,,,,,,,,,u,,,,u,,,,,,,,,,,,,,,,,,,,,,,u~~~,,,,,,,,,,,,,,,,,,,,,,,,,,/,,,,,,#',
+  '#,,,,,,,,,z,,,,,,,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,@,&,%,V,,,,,,,,,,,,/,,,,,,,/,,#',
+  '#,,,l,,,l,,l,,l,,l,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,,,,,,,,,,,,,,,,,,,,,,,aQaaaQ#',
+  '#,,,,,,,,,,,,,,,,,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,,,,,,,,,,,,,,,,,,,,,,a5aaaaa#',
+  '#,,Y,,,,,,l,,l,,,,,,c,,c,,c,,c,,c,,c,,c,,===,,,,,,,,,,,,,,,,,,,,,,,/,aaaaaQaa#',
+  '#,,,,,l,,,,,,,,,l,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,ffffffffffffffff,,,,maaaaamQ#',
+  '#,,,,,,,,,,,,,,,,,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,f,,P,f,h,,f,,G,f,,,,aaaaaaaa#',
+  '#,,,,l,,l,,Y,,l,,l,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,f,P,,f,,h,fGG,,f,/,,,QaaQa5a#',
+  '#,,,Y,u,,u,,,,u,,Y,,,,,,,,,,,,,,,,,,,,,,,~~~Yu,,,ffffffffffffffff,,,/,,aQaaaa#',
+  '#,,,,,,,,,,,,,,,ppppppppppppppppppppppppp~~~pppppppppppppppppp,,,/,,,,,,,,,,/#',
+  '#,Y,,,,,,,Y,,,l,Bpppppppppppppppppppppppp~~~pppppppppppppppppB,,/Y,,,,,/,,Y,,#',
+  '#,,,e,,,,,,,,l,,ppJ+ppppK+pppppppJ+pppppp~~~ppppZ+ppppJ+pppppp,,,,l,,,,,,,,,,#',
+  '#,g,,,,,,,,,,,,,pp++pppp++ppppppp++pppppp~~~pppp++pppp++pppppp,,,,,,/,,,,l,,,#',
+  '#n,,,g,,,Y,,l,,,ppppppppppppppppppppppppp~~~pppppppppppppppppp,,,,,,,,,,,,,,/#',
+  '#,,e,,,,n,,,,,l,pppppppppppppppppppp(+ppp---pppppppppppp(+pppp,,,/,,,,,,Y,,,,#',
+  '#g,e,,,g,,,,,,,,pBppppppppppppppppppppppp---ppppppppppppppppBp,,,,,,l,,,,,,,,#',
+  '#,e,n,,,,,,,,,,,pppppK+ppppZ+pppppppK+ppp---pppppppJ+ppppK+ppp,,,,,,,,/,,,/,,#',
+  '#,,g,ee,n,,,,l,,ppppp++pppp++ppppppp++ppp~~~ppppppp++pppp++ppp,,,,,,,Y,,,,,,,#',
+  '#n,,e,n,,,Y,,,,,ppppppppppppppppppppppppp~~~pppppppppppppppppp,,,,,,,,l,,/,,,#',
+  '#,g,,e,,,g,,,,l,ppppppp(+pppppppppppppppp~~~pp(+pppppppppppppp,/,,Y,,,,,,,,l,#',
+  '#g,g,,ne,,,,l,,,Bpppppppppppppppppppppppp~~~pppppppppppppppppB,,,,,,/,,,,,,,,#',
+  '##############################################################################',
 ]
 const T = 16
 const PAREDE = '#o1234' // rocha e veios de minério
-const SOLIDO = PAREDE + '~BTFLbfENIYuDSHMXJKZmCUROAW$@&%56789!^(+[]' // P, G, Q, V e z são bichos: o chão embaixo é livre, eles é que ocupam. Trigo (c), cogumelo (g) e cadeira (;) se atravessam.
+const SOLIDO = PAREDE + '~BTFLbfENIYuDSHMXJKZmCUROAW$@&%56789!^(+[]jqyi{}<*?>|' // P, G, h (ovelha), Q, V e z são bichos: o chão embaixo é livre, eles é que ocupam. Trigo (c), cogumelos (g, e, n), mato (/) e cadeira (;) se atravessam.
 // Objetos maiores que um tile ficam com a letra no canto de cima à esquerda e '+' no resto.
-export const INICIO: [number, number] = [24, 15] // meio da taverna
+export const INICIO: [number, number] = [54, 15] // meio da taverna
 
 /** Onde cada anão fica, perto do que faz. */
 export const LOCAL: Record<string, [number, number]> = {
-  hidromel: [6, 4], // mina
-  cerveja: [17, 5], // quartel
-  grogue: [29, 3], // forja
-  licor: [7, 17], // entre os cercados da fazenda
-  furia: [19, 12], // barris da taverna
-  contra: [20, 8], // quartel
-  teclados: [36, 14], // oficina
-  nobre: [41, 2], // salão nobre
-  trapacas: [10, 36], // feira
-  lampadas: [17, 37], // lampiões da feira
-  moderado: [35, 41], // feira
-  comprido: [10, 13], // fazenda
-  mari: [4, 24], // jardim
-  aquecido: [43, 14], // consultório
-  pontes: [10, 25], // ponte
-  papagaios: [19, 25], // estábulo
-  scarlett: [30, 12], // palco da taverna
-  formigas: [41, 27], // formigueiro
+  hidromel: [7, 4], // mina
+  cerveja: [67, 14], // quartel
+  grogue: [22, 3], // forja
+  licor: [22, 28], // fazenda
+  furia: [49, 12], // barris da taverna
+  contra: [72, 17], // quartel
+  teclados: [45, 4], // biblioteca
+  nobre: [70, 2], // salão nobre
+  trapacas: [25, 36], // livre comércio
+  lampadas: [29, 37], // lampiões do livre comércio
+  moderado: [50, 41], // livre comércio
+  comprido: [25, 24], // fazenda
+  mari: [6, 24], // jardim
+  aquecido: [23, 15], // administração
+  pontes: [40, 25], // ponte
+  papagaios: [49, 25], // animais
+  scarlett: [60, 12], // palco da taverna
+  formigas: [71, 27], // formigueiro
 }
 
 const ZONAS: [string, number, number][] = [
-  ['Mina', 6, 1], ['Quartel', 17.5, 2], ['Forja', 29, 2], ['Salão Nobre', 41, 9], ['Fazenda', 7.5, 11], ['Taverna', 23.5, 11],
-  ['Oficina', 36, 12], ['Consultório', 43.5, 11], ['Jardim', 5.5, 21], ['Estábulo', 19, 21], ['Cozinha', 29, 22], ['Formigueiro', 40.5, 21],
-  ['Feira', 23.5, 32],
+  ['Mina', 7, 1], ['Quartel', 69.5, 12], ['Forja', 22.5, 1], ['Salão Nobre', 69.5, 9], ['Fazenda', 28, 21], ['Taverna', 53.5, 11],
+  ['Biblioteca', 45.5, 2], ['Alquimista', 34, 1], ['Jardim', 7.5, 21], ['Animais', 53.5, 21], ['Cozinha', 57.5, 2], ['Formigueiro', 72.5, 24],
+  ['Livre Comércio', 38.5, 32], ['Cogumelos', 5, 33], ['Carpintaria', 7.5, 11], ['Área Comum', 37.5, 11], ['Administração', 22.5, 11],
 ]
+/** Salas vazias da esquerda, em pares (A1 | A2), ainda sem destino: só uma letra grande no chão para referência. */
+const SALAS = ([['A', 5], ['B', 15], ['C', 25.5], ['D', 37]] as const).flatMap(([l, y]): [string, number, number][] => [[l + 1, 7.5, y], [l + 2, 22.5, y]])
+  .filter(([n]) => !['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'].includes(n)) // A1 virou a Mina, A2 a Forja, B1 a Carpintaria, B2 a Administração, C1 o Jardim, C2 a Fazenda, D1 mato e D2 o Livre Comércio
 
 export const andavel = (x: number, y: number) => !SOLIDO.includes(MAPA[y]?.[x] ?? '#')
 
@@ -90,8 +92,8 @@ export const andavel = (x: number, y: number) => !SOLIDO.includes(MAPA[y]?.[x] ?
 
 const PISO: Record<string, [string, string]> = {
   '#': ['#2a221d', '#3d322a'], '.': ['#4a3c30', '#3d322a'], p: ['#2a221d', '#5a4e44'], x: ['#5e5652', '#3e3834'],
-  t: ['#8a8f99', '#e8ecf0'], v: ['#b0804a', '#8a5a2a'], ',': ['#3a3018', '#5a8a2a'], w: ['#6a4018', '#4a2a10'],
-  r: ['#8a1424', '#b0302a'], '~': ['#1a3a6a', '#5ce6e6'], '=': ['#9c6a2f', '#5a3a18'], h: ['#8a7a3a', '#c8b060'], a: ['#5a3a1a', '#3a2410'],
+  s: ['#3e3834', '#5e5652'], v: ['#8a6438', '#6a4420'], ',': ['#3a3018', '#5a8a2a'], w: ['#6a4018', '#4a2a10'],
+  r: ['#8a1424', '#b0302a'], '~': ['#1a3a6a', '#5ce6e6'], '=': ['#9c6a2f', '#5a3a18'], '-': ['#6a5e52', '#3d322a'], a: ['#5a3a1a', '#3a2410'],
 }
 const MADEIRA = { n: '#9c6a2f', N: '#c88a4a' }
 const VEIO = [
@@ -203,9 +205,15 @@ const CERCA_V = compose([[
   '......kN', '......kN', '.....kkn', '.....knn', '.....kkn', '......kN', '......kN', '......kN',
 ]], MADEIRA)
 const ARBUSTO = compose([[
-  '........', '........', '........', '........', '........', '....kkkk', '..kkgggg', '.kgGgggg',
-  '.kggggGg', 'kgggrggg', 'kggggggg', 'kgGggggg', '.kkggggg', '...kkkkk', '........', '........',
-]], { ...VERDE, r: '#e02a3a' })
+  '....kkkk.kkkk...', '..kkgGGgkgGGgk..',
+  '.kgGGggrgGgggdk.', '.kgGgrwggggrgdk.',
+  'kgGggrrggggrrgdk', 'kgggggggGGgggddk',
+  'kgGgrggGGggggdgk', 'kggrwrgggggrgddk',
+  'kgggrggggrgrwgdk', 'kgGgggGggrrggddk',
+  '.kgggGGggggggdk.', 'kgggrgggggrggddk',
+  'kgdgrrgggrwrgddk', '.kdddgggggrgdddk',
+  '..kdddddddddddk.', '...kkkkkkkkkkk..',
+]], { ...VERDE, d: '#2a6a22', r: '#e02a3a', w: '#ffb0b8' })
 const FLORES = compose([[
   '................', '................', '...r.......y....', '..rwr.....ywy...', '...r.......y....', '...g.......g....',
   '...g...p...g....', '......pwp.......', '.......p........', '.......g........',
@@ -265,25 +273,29 @@ const CARRINHO = grade([
   '...knnnnnnnnnnnnnnnnnnnk', '...kNNNNNNNNNNNNNNNNNNNkkkkkkkk', '...knnnnnnnnnnnnnnnnnnnknnnnnnnk', '...kNNNNNNNNNNNNNNNNNNNkkkkkkkk',
   '...kkkkkkkkkkkkkkkkkkkkk', '.....kkkk.......kkkk', '....kiiiik.....kiiiik', '....kiNNik.....kiNNik', '....kiiiik.....kiiiik', '.....kkkk.......kkkk',
 ].map(pad), { ...MADEIRA, 1: '#e02a3a', 2: '#ffb02a', 3: '#6cdc4a', w: '#fff6e0', i: '#4a4a52' })
-// 32x24: dois tiles de largura, um e meio de altura
-/** Quatro pernas finas: as de trás dobram no jarrete, as da frente têm joelho; as do lado de lá são mais escuras. */
-function pernas() {
-  const linhas = Array.from({ length: 6 }, () => [...'.'.repeat(32)])
-  const PERNAS: [number, string, number[]][] = [[9, 'B', [0, -1, -1, 0, 0, 0]], [16, 'B', [0, 0, 0, 0, 0, 0]], [6, 'b', [0, -1, -1, 0, 0, 0]], [19, 'b', [0, 0, 0, 0, 0, 0]]]
-  for (const [col, cor, desvio] of PERNAS)
-    desvio.forEach((d, j) => {
-      const meio = j === 4 ? 'd' : j === 5 ? 'k' : j === 2 && cor === 'b' ? 'h' : cor // casco escuro, joelho claro
-      linhas[j].splice(col + d, 3, 'k', meio, 'k')
-    })
-  return linhas.map((l) => l.join(''))
-}
-const CAVALO = grade([
-  '........................kk......', '.......................kbk......', '......................kmbbkk....', '.....................kmmbbbbk...',
-  '....................kmmbbebbbk..', '...................kmmbbbbbbbbk.', '..................kmmbbbbkkbbbBk', '.................kmmbbbbk..kbbBk',
-  '.................kmbbbbk....kkk.', '..kkk...........kmbbbbbk........', '.kmmmkkkkkkkkkkkkbbbbbbk........', 'kmmk.kbbbbbbbbbbbbbbbbbk........',
-  'kmk.kbbbbbbbbbbbbbbbbbbbk.......', 'km..kbbbbbbbbbbbbbbbbbbbk.......', 'kmk.kbbbbbbbbbbbbbbbbbbBk.......', '.kmkkBbbbbbbbbbbbbbbbbBBk.......',
-  '.km.kBBbbbbbbbbbbbbbbBBk........', '..kk.kkkkkkkkkkkkkkkkkkk........', ...pernas(),
-], { b: '#8a5a2a', B: '#6a4018', m: '#2a1a0a', d: '#3a2a18', h: '#a87a4a' })
+// 2x2: de perfil olhando para a direita, sela no lombo onde o anão senta
+const CORPO_CAVALO = [
+  '', '', '........................k.k', '.......................kbkbk',
+  '......................kmbbbbk', '.....................kmmbbbbbk', '....................kmmhbbbebbk', '....................kmmhbbbbbbbk',
+  '...................kmmhbbbbbbnnk', '...................kmmhbbkkbnenk', '..................kmmhbbbk.knnk', '..................kmmhbbbk..kk',
+  '.................kmmhbbbbbk', '..kk.............kmhbbbbbbk', '.kmmk.kkkkkkkkkkkkhhbbbbbbBk', 'kmmmmkhksssssssSkhhbbbbbbbBk',
+  'kmmmkbbksssssssSkbbbbbbbbbBk', '.kmmkbbkSSSSSSSSkbbbbbbbbbBk', '.kmmkbbbkkkkkkkkbbbbbbbbbbBk', 'kmmmkbbbbbbbbbbbbbbbbbbbbbBk',
+  'kmmmkBbbbbbbbbbbbbbbbbbbbBBk', 'kmmk.kBbbbbbbbbbbbbbbbbbBBk', 'kmmk.kBBBBBBBBBBBBBBBBBBBBk', '.kmk.kbBkBBkkkkkkkkkbBkBBk',
+  '.kmk.kbBkBBk.......kbBkBBk', '..kk.kbBkBBk.......kbBkBBk', '.....khBkBBk.......khBkBBk', '.....kbBkBBk.......kbBkBBk',
+  '.....kbBkBBk.......kbBkBBk', '.....kwwkddk.......kwwkddk', '.....kddkddk.......kddkddk', '.....kkkkkkk.......kkkkkkk',
+]
+const COR_CAVALO = { b: '#8a5a2a', B: '#6a4018', h: '#a87a4a', m: '#2a1a0a', d: '#3a2a18', n: '#5a3a1a', w: '#f4ecd8', s: '#c43a1a', S: '#8a1424' }
+const CAVALO = grade(CORPO_CAVALO.map(pad), COR_CAVALO)
+// Passos do anão a pé: só os pés (linhas 14 e 15) mudam, a altura fica a mesma.
+const PES = [['..kddk...kddk...', '.kddkk....kddk..'], ['...kddk...kddk..', '..kddk....kkddk.']]
+// Trote: só as pernas mudam, os cascos ficam sempre na mesma linha para o cavalo não subir e descer.
+const TROTE = [[
+  '.kmk.kbBkBBk.......kbBkBBk', '..kkkbBk.kBBk.......kbBkk', '....khBk.kBBk.......khBkk', '...kbBk...kBBk......kkbBk',
+  '...kbBk...kBBk......kkbBk', '...kwwk...kddk......kkwwk', '..kddk.....kddk....kddkddk', '..kkkk.....kkkk....kkkkkkk',
+], [
+  '.kmk.kbBkBBk.......kbBkBBk', '..kk..kbBkk.......kbBk.kBBk', '......khBkk.......khBk.kBBk', '......kkbBk......kbBk...kBBk',
+  '......kkbBk......kbBk...kBBk', '......kkwwk......kwwk...kddk', '.....kddkddk....kddk.....kddk', '.....kkkkkkk....kkkk.....kkkk',
+]].map((pernas) => grade([...CORPO_CAVALO.slice(0, 24), ...pernas].map(pad), COR_CAVALO))
 const COBRA = compose([[
   '', '', '', '', '', '', '', '', '..........kkk...', '.........kgegk..', '..kkk....kgggkr.', '.kgGgk..kgGgk...',
   'kgk.kgkkgGgk....', 'kgk..kgGggk.....', '.kgk..kkkk......', '..kk............',
@@ -293,6 +305,13 @@ const PAPAGAIO = [
   '.....kppppkk....', '....kpPPppk.....', '....kpPPPpk.....', '....kpPPppk.....', '.....kppkk......', '...kkkpkkkkk....',
   '...knnnnnnnk....', '...kkkknkkkk....', '.......n........', '.....kknkk......',
 ]
+// Bater de asa: a asa abre para trás e para cima sem passar da cabeça, então o papagaio não muda de altura.
+const MEIA_ASA = [...PAPAGAIO.slice(0, 6), '...kkppppkk.....', '..kPPkPppk......', '..kPPPPPpk......', '...kkPPppk......', ...PAPAGAIO.slice(10)]
+const ASA_CIMA = [...PAPAGAIO.slice(0, 3), '..k...kpppk.....', '.kPk..kpepkk....', '.kPPk.kppkyyk...', '.kPPPkppppkk....', '..kPPPkpppk.....',
+  '...kPPPkppk.....', '....kkkpppk.....', ...PAPAGAIO.slice(10)]
+/** Quadros de cada papagaio: pousado, meia asa, asa em cima, meia asa. */
+const PAPAGAIOS: Record<string, Grid[]> = Object.fromEntries(Object.entries({ '@': ['#e02a3a', '#3a5aa8'], '&': ['#3a7ae8', '#ffd23b'], '%': ['#3a9a3a', '#e02a3a'] })
+  .map(([ch, [p, P]]) => [ch, [PAPAGAIO, MEIA_ASA, ASA_CIMA, MEIA_ASA].map((g) => compose([g], { ...MADEIRA, p, P, e: '#1b1410', y: '#f0e0a0' }))]))
 // Bar: prateleira de garrafas de todo tamanho e balcão com drinks.
 const FUNDO = Array(16).fill('dddddddd')
 const GARRAFAS = [
@@ -306,6 +325,71 @@ const BALCAO = ['', '', '', '', '', '', '', '', 'kkkkkkkkkkkkkkkk', 'kNNNNNNNNNN
 const CANECO = ['', '', '', '..fff.......2...', '.kyyyk.....k2k..', '.kyyykk....k2k..', '.kyyyk.k...kkk..', '.kkkkkk.....k...']
 const TACAS = ['', '.........3......', '.........3......', '........333.....', '..k.k...3w3.....', '..kgk...333.....', '...k....333.....', '..kkk...333.....']
 
+// Lapidação: bancada com roda de pedra, mostruário de gemas e monte de gemas brutas.
+const GEMAS_PAL = { r: '#e02a3a', R: '#ff8a8a', g: '#2fc870', G: '#aaffcc', b: '#3a7ae8', B: '#9ad0ff', y: '#ffd23b', Y: '#fff6b0' }
+const LAPIDARIO = compose([[
+  '................', '................', '....kkkk........', '...kiIIik.......', '..kiIiiIik......', '..kiIkkIik......', '..kiiiiiik...k..', '...kiiiik...kgk.',
+  '....kkkk...kgGgk', 'kkkkkkkkkkkkkkkk', 'kNNNNNNNNNNNNNNk', 'knnnnnnnnnnnnnnk', 'kkkkkkkkkkkkkkkk', '.knk........knk.', '.knk........knk.', '.kkk........kkk.',
+]], { ...MADEIRA, ...GEMAS_PAL, i: '#6a6a72', I: '#b8bcc4' })
+const MOSTRUARIO = compose([[
+  '', '', '', '.kkkkkkkkkkkkkk.', '.kwccccccccccck.', '.kvrRvgGvbBvyYk.', '.kvvvvvvvvvvvvk.', '.kkkkkkkkkkkkkk.',
+  '.kNNNNNNNNNNNNk.', '.knnnnnnnnnnnnk.', '.knnnnnNNnnnnnk.', '.kkkkkkkkkkkkkk.', '.knk........knk.', '.kkk........kkk.',
+]], { ...MADEIRA, ...GEMAS_PAL, c: '#9ad0e8', w: '#f4ecd8', v: '#5a1a3a' })
+const GEMAS = compose([[
+  '', '', '', '', '', '', '', '', '.......k........', '......kGk...k...', '......kgk..kBk..', '..k..kggGk.kbk..',
+  '.kRk.kgggkkbBbk.', 'krRrkkkkkkkbbbk.', 'kkkkkkkkkkkkkkk.',
+]], GEMAS_PAL)
+
+// Colmeia de palha trançada num suporte de madeira, com abelhas em volta.
+const COLMEIA = compose([[
+  '', '', '......kkkk......', '....kkyYyykk....', '...kyyyyyyyyk...', '...kYYYYYYYYk.b.', '..kyyyyyyyyyyk..', '..kyyyyyyyyyyk.b',
+  '..kYYYYYYYYYYk..', '..kyyyykkyyyyk..', '..kyyykxxkyyyk..', '..kYYYkxxkYYYk..', '.kkkkkkkkkkkkkk.', '.knnnnnnnnnnnnk.', '.kkkkkkkkkkkkkk.', '..kk........kk..',
+]], { ...MADEIRA, y: '#d8a040', Y: '#a8742a', x: '#1b1410', b: '#ffd23b' })
+
+// Mais dois cogumelos, para o canteiro: o vermelho de pintas brancas e um trio pardo.
+const AMANITA = compose([[
+  '', '', '', '', '', '.....kkkkkk.....', '...kkrrwrrrkk...', '..krwrrrrrwrrk..', '..krrrrwrrrrrk..', '.krrwrrrrrrwrrk.',
+  '.kkkkkkkkkkkkkk.', '......kssk......', '......kssk......', '.....ksSssk.....', '.....kkkkkk.....',
+]], { r: '#c43a1a', w: '#f4ecd8', s: '#e8dcc0', S: '#c8b898' })
+const PARDOS = compose([[
+  '', '', '', '', '', '', '', '..kkkk....kkkk..', '.kbBBbk..kbBBbk.', '.kbbbbk..kbbbbk.', '..kssk.kkk.ksk..', '..kssk.kBk.ksk..',
+  '..kssk..s..ksk..', '.kkkkkkkkkkkkkk.',
+]], { b: '#8a5a2a', B: '#b07a3a', s: '#e8dcc0' })
+
+// Carpintaria: bancada com serrote, pilha de tábuas e toras vistas de ponta.
+const BANCADA_CARP = compose([[
+  '', '', '', '', '', '...kkkkkkkk.kkk.', '...kIIIIIIIkknnk', '...kkikikikk.kk.', 'kkkkkkkkkkkkkkkk', 'kNNNNNNNNNNNNNNk', 'knnnnnnnnnnnnnnk',
+  'kkkkkkkkkkkkkkkk', '.knk..kkkk..knk.', '.knk..knnk..knk.', '.knk..kkkk..knk.', '.kkk........kkk.',
+]], { ...MADEIRA, i: '#6a6a72', I: '#b8bcc4' })
+const TABUAS = compose([[
+  '', '', '', '', '', '', '', '.kkkkkkkkkkkkkk.', 'kNNNNNNNNNNNNNNk', 'knnnnnnnnnnnnnnk', 'kkkkkkkkkkkkkkkk', 'kNNNNNNNNNNNNNNk',
+  'knnnnnnnnnnnnnnk', 'kkkkkkkkkkkkkkkk', 'kNNNNNNNNNNNNNNk', 'kkkkkkkkkkkkkkkk',
+]], MADEIRA)
+const TORAS = compose([['................', '................', '................', '................', '................', '................', '......kkk.......', '.....kyYyk......', '.....kYoYk......', '.....kyYyk......', '...kkkkkkkkk....', '..kyYyk.kyYyk...', '..kYoYk.kYoYk...', '..kyYyk.kyYyk...', '...kkk...kkk....', '................']], { y: '#c88a4a', Y: '#9c6a2f', o: '#5a3a18' })
+// Administração: escrivaninha com papéis, pena e tinteiro; baú com faixas de ferro.
+const ESCRIVANINHA = compose([[
+  '', '', '', '', '', '..kkkkk...kk....', '..kwwwwk.kfk....', '..kwlwwk.kfk....', '..kwlwlkkkxk....', 'kkkkkkkkkkkkkkkk', 'kNNNNNNNNNNNNNNk',
+  'knnnnnnnnnnnnnnk', 'kkkkkkkkkkkkkkkk', '.knk........knk.', '.knk........knk.', '.kkk........kkk.',
+]], { ...MADEIRA, w: '#f4ecd8', l: '#8a7a6a', f: '#e8e0d0', x: '#1b1410' })
+const BAU = compose([[
+  '', '', '', '', '', '', '', '..kkkkkkkkkkkk..', '.kNNNNNNNNNNNNk.', '.knnnnnnnnnnnnk.', '.kiiiiiyyiiiiik.', '.knnnnnyynnnnnk.',
+  '.knnnnnnnnnnnnk.', '.kiiiiiiiiiiiik.', '.kkkkkkkkkkkkkk.',
+]], { ...MADEIRA, i: '#6a6a72', y: '#e0a82a' })
+
+// Alquimista: bancada com balão e frasco borbulhando, prateleira de poções.
+const BANCADA_ALQ = compose([[
+  '', '', '', '....kk..........', '....kk......k...', '...kppk....kbk..', '..kpPppk...kbk..', '..kppppk..kbbbk.', '...kkkk..kbbbbbk', 'kkkkkkkkkkkkkkkk', 'kNNNNNNNNNNNNNNk', 'knnnnnnnnnnnnnnk', 'kkkkkkkkkkkkkkkk', '.knk........knk.', '.knk........knk.', '.kkk........kkk.',
+]], { ...MADEIRA, p: '#a050c8', P: '#d8a0f0', b: '#5ce6e6' })
+const POCOES = compose([['kkkkkkkkkkkkkkkk', 'knnnnnnnnnnnnnnk', 'knddkdddkdddkdnk', 'kndkrkdkgkdkbknk', 'kndkRkdkGkdkBknk', 'kndkkkdkkkdkkknk', 'knnnnnnnnnnnnnnk', 'knnnnnnnnnnnnnnk', 'knddkdddkdddkdnk', 'kndkpkdkykdkcknk', 'kndkPkdkYkdkCknk', 'kndkkkdkkkdkkknk', 'knnnnnnnnnnnnnnk', 'kkkkkkkkkkkkkkkk', '................', '................']], {
+  ...MADEIRA, d: '#2a1a0a', r: '#e02a3a', R: '#ff8a8a', g: '#2fc870', G: '#aaffcc', b: '#3a7ae8', B: '#9ad0ff', p: '#a050c8', P: '#d8a0f0', y: '#ffd23b', Y: '#fff6b0', c: '#5ce6e6', C: '#c8ffff',
+})
+
+// Tufo de mato à Minecraft: lâminas finas de alturas diferentes abrindo em leque, escuras na base e claras na ponta.
+const MATO = compose([[
+  '................', '................', '......G.........', '......G..G......', '......h..G...G..', '..G...h..h...G..', '..G...h..h..h...', '...h...h.hG.h..G',
+  'G..h...gg.h.h.h.', '.h..hG.gg.hg..h.', '.h..gh.ggh.g.h.G', 'G.g.gh.ggg.G.g.h', 'h.g.Gggdgggh.gh.', '.g.ghdgddgdgg.g.', '.g.dgddddddgd.d.', '.d.dddddddddd.d.',
+]], { d: '#1f4a1a', g: '#2f7a2a', h: '#4caa34', G: '#8ae05a' })
+
 const PROP: Record<string, Grid> = {
   ...MINERIO, ...PEDRAS, '!': MICROFONE, '^': ESTATUA, B: BARRIL, U: icone('m'), C: CALDEIRAO, F: FORJA, L: icone('A'), c: icone('c'), b: icone('b'), g: icone('g'),
   f: CERCA, T: MESA, '[': mesaLonga(2), ']': mesaLonga(3), ';': CADEIRA, $: PEPITA, E: ESTANTE, N: FORNALHA, I: BIGORNA, Y: ARVORE, u: ARBUSTO, l: FLORES,
@@ -313,16 +397,19 @@ const PROP: Record<string, Grid> = {
   O: compose([FUNDO, GARRAFAS], { ...VIDROS, 1: '#c070e0', 2: '#ffd23b', 3: '#5a2a1a', 4: '#e02a3a', 5: '#2fc870', 6: '#f4ecd8' }),
   A: compose([BALCAO, CANECO], { ...MADEIRA, y: '#e8a02a', f: '#fff6e0', 2: '#8a1424' }),
   W: compose([BALCAO, TACAS], { ...MADEIRA, w: '#fff6e0', 3: '#3a5aa8', g: '#6cdc4a' }),
-  '@': compose([PAPAGAIO], { ...MADEIRA, p: '#e02a3a', P: '#3a5aa8', e: '#1b1410', y: '#f0e0a0' }),
-  '&': compose([PAPAGAIO], { ...MADEIRA, p: '#3a7ae8', P: '#ffd23b', e: '#1b1410', y: '#f0e0a0' }),
-  '%': compose([PAPAGAIO], { ...MADEIRA, p: '#3a9a3a', P: '#e02a3a', e: '#1b1410', y: '#f0e0a0' }),
   D: BONECO, S: ESPADA, H: ESCUDO, M: MARTELO, X: MACHADO, m: MONTE,
   J: grade(BARRACA, { ...BENS, a: '#e02a3a', A: '#f4ecd8', 1: '#e02a3a', 2: '#ffb02a', 3: '#6cdc4a' }), // frutas
   K: grade(BARRACA, { ...BENS, a: '#3a5aa8', A: '#f4ecd8', 1: '#c070e0', 2: '#5ce6e6', 3: '#ffd23b' }), // tecidos
   Z: grade(BARRACA, { ...BENS, a: '#3a8a2a', A: '#ffd23b', 1: '#5ce6e6', 2: '#e83a1a', 3: '#c070e0' }), // poções
   '(': CARRINHO,
+  j: LAPIDARIO, q: MOSTRUARIO, y: GEMAS, i: COLMEIA, e: AMANITA, n: PARDOS,
+  '{': BANCADA_CARP, '}': TABUAS, '<': TORAS, '*': ESCRIVANINHA, '?': BAU, '>': BANCADA_ALQ, '|': POCOES, '/': MATO,
 }
-const BICHO: Record<string, Grid> = { P: PORCO, G: GALINHA, Q: FORMIGA, V: CAVALO, z: COBRA }
+const OVELHA = compose([[
+  '', '', '', '', '', '....kkkkkk......', '...kwwWwwwk.kk..', '..kwWwwwWwwkddk.', '.kwwwwwwwwwkdedk', '.kwWwwwwWwwkdddk',
+  '.kwwwwwwwwwwkkk.', '..kwwWwwwwwk....', '...kkkkkkkk.....', '...kdk..kdk.....', '...kdk..kdk.....', '...kk...kk......',
+]], { w: '#f4ecd8', W: '#d8d0b8', d: '#3a2a18', e: '#f4ecd8' })
+const BICHO: Record<string, Grid> = { P: PORCO, G: GALINHA, h: OVELHA, Q: FORMIGA, V: CAVALO, z: COBRA }
 
 // Gente que não é anão: fala como os anões, mas não tem fase.
 const GOBLIN = compose([[
@@ -350,12 +437,12 @@ const ORC = compose([[
   '..kkgggg', '.kAAAAAA', 'kgkAaAAA', 'kgkAAAaA', 'kkkAAAAA', '...kddkk', '...kddk.', '...kkkk.',
 ]], { g: '#5a7a3a', e: '#ff3b2f', w: '#f4ecd8', A: '#4a4a52', a: '#8a8f99', d: '#3a2a18' })
 export const EXTRAS = [
-  { id: 'goblin', nome: 'Grishnak, o Goblin', fala: 'Psiu... troco ouro de anão por um gole. Ninguém precisa saber.', x: 21, y: 14, s: 1, g: GOBLIN },
-  { id: 'elfo', nome: 'Elandor, o Elfo', fala: 'Vim provar a cerveja anã. Dizem que é melhor que vinho élfico. Duvido.', x: 6, y: 27, s: 1, g: ELFO },
-  { id: 'snik', nome: 'Snik, o Goblin', fala: 'Bugigangas! Pedras brilhantes! Quase nada roubado!', x: 13, y: 36, s: 1, g: GOBLIN },
-  { id: 'grot', nome: 'Grot, o Goblin', fala: 'Não olha pra minha barraca. Olha pra lá. ...Pronto, já era.', x: 38, y: 41, s: 1, g: GOBLIN },
-  { id: 'orc', nome: 'Urzog, o Orc', fala: 'Orc quer cerveja. Orc paga com... respeito.', x: 20, y: 41, s: 1, g: ORC },
-  { id: 'dragao', nome: 'Ignaroth, o Dragão', fala: 'Zzz... quem chega perto do meu ouro? ...Ah, só um anão. Zzz.', x: 8, y: 2, s: 2, g: DRAGAO },
+  { id: 'goblin', nome: 'Grishnak, o Goblin', fala: 'Psiu... troco ouro de anão por um gole. Ninguém precisa saber.', x: 45, y: 35, s: 1, g: GOBLIN },
+  { id: 'elfo', nome: 'Elandor, o Elfo', fala: 'Vim provar a cerveja anã. Dizem que é melhor que vinho élfico. Duvido.', x: 8, y: 27, s: 1, g: ELFO },
+  { id: 'snik', nome: 'Snik, o Goblin', fala: 'Bugigangas! Pedras brilhantes! Quase nada roubado!', x: 26, y: 36, s: 1, g: GOBLIN },
+  { id: 'grot', nome: 'Grot, o Goblin', fala: 'Não olha pra minha barraca. Olha pra lá. ...Pronto, já era.', x: 53, y: 41, s: 1, g: GOBLIN },
+  { id: 'orc', nome: 'Urzog, o Orc', fala: 'Orc quer cerveja. Orc paga com... respeito.', x: 32, y: 41, s: 1, g: ORC },
+  { id: 'dragao', nome: 'Ignaroth, o Dragão', fala: 'Zzz... quem chega perto do meu ouro? ...Ah, só um anão. Zzz.', x: 9, y: 2, s: 2, g: DRAGAO },
 ]
 
 function pinta(ctx: CanvasRenderingContext2D, g: Grid, x: number, y: number) {
@@ -366,11 +453,19 @@ const sprite = (g: Grid) => {
   pinta(c.getContext('2d')!, g, 0, 0)
   return c
 }
+/** Altura do pé: a linha logo abaixo do último pixel pintado. É a chave do Y-sort. */
+const pe = (g: Grid) => g.length - [...g].reverse().findIndex((r) => r.some(Boolean))
 
-/** Chão sob um objeto: o vizinho mais perto que é piso (objetos grandes cercam o meio de outros objetos). */
+/** Vizinhos do mais perto ao mais longe: objetos grandes cercam o meio de outros objetos. */
 const VIZINHOS = [[-1, 0], [1, 0], [0, 1], [0, -1], [-1, -1], [1, -1], [-1, 1], [1, 1], [-2, 0], [2, 0], [0, 2], [0, -2], [-3, 0], [3, 0]]
-const chao = (x: number, y: number) =>
-  VIZINHOS.map(([dx, dy]) => MAPA[y + dy]?.[x + dx]).find((c) => c && c in PISO && c !== '#' && c !== '~') ?? '.'
+const ePiso = (c?: string): c is string => !!c && c in PISO && c !== '#' && c !== '~'
+/** Chão sob um objeto: o piso que mais aparece nos 8 vizinhos (no empate, o mais perto); sem nenhum, o mais perto da lista toda. */
+const chao = (x: number, y: number) => {
+  const em = ([dx, dy]: number[]) => MAPA[y + dy]?.[x + dx]
+  const perto = VIZINHOS.slice(0, 8).map(em).filter(ePiso)
+  const conta = (c: string) => perto.filter((d) => d === c).length
+  return perto.reduce((m, c) => (conta(c) > conta(m) ? c : m), perto[0]) ?? VIZINHOS.map(em).find(ePiso) ?? '.'
+}
 const parede = (x: number, y: number) => PAREDE.includes(MAPA[y]?.[x] ?? '#')
 
 /** Pinta o tile (x, y) com o padrão do piso `qual`. */
@@ -381,8 +476,18 @@ function piso(ctx: CanvasRenderingContext2D, qual: string, x: number, y: number)
   if (qual === 'p') { // calçamento de pedras
     const pedras = y % 2 ? [[0, 0, 7], [8, 0, 7], [0, 8, 3], [4, 8, 7], [12, 8, 4]] : [[0, 0, 3], [4, 0, 7], [12, 0, 4], [0, 8, 7], [8, 8, 7]]
     pedras.forEach(([sx, sy, w], k) => (rect((x + k) % 3 ? mancha : '#6a5e52', sx, sy, w, 7), rect('#7a6e62', sx, sy, w, 1)))
-  } else if (qual === 't') { // azulejo
-    for (const [qx, qy] of [[0, 0], [8, 0], [0, 8], [8, 8]]) rect((qx + qy) % 16 ? '#7aa8c8' : mancha, qx, qy, 7, 7)
+    // meio-fio onde o calçamento encontra grama ou o rio: pedra clara na borda e uma linha de sombra para dentro
+    const grama = (nx: number, ny: number) => { const n = MAPA[ny]?.[nx]; return n === 'f' || n === '~' || (!!n && !(n in PISO) && !PAREDE.includes(n) ? chao(nx, ny) === ',' : n === ',') } // cerca sempre fica na grama; '~' é a margem do rio
+    if (grama(x, y - 1)) rect('#8a7e72', 0, 0, T, 2), rect('#1b1410', 0, 2, T, 1)
+    if (grama(x, y + 1)) rect('#1b1410', 0, 13, T, 1), rect('#8a7e72', 0, 14, T, 2)
+    if (grama(x - 1, y)) rect('#8a7e72', 0, 0, 2, T), rect('#1b1410', 2, 0, 1, T)
+    if (grama(x + 1, y)) rect('#1b1410', 13, 0, 1, T), rect('#8a7e72', 14, 0, 2, T)
+  } else if (qual === 's') { // lajes de pedra nas cores do chão do quartel: duas fiadas de placas desencontradas, cada placa num tom, com luz na borda de cima
+    const c1 = 4 + ((x * 5 + y * 3) % 8), c2 = 4 + ((x * 3 + y * 7) % 8)
+    ;[[0, 0, c1], [c1, 0, T - c1], [0, 8, c2], [c2, 8, T - c2]].forEach(([sx, sy, w], k) => {
+      rect(['#5e5652', '#665e5a', '#56504c'][(x + y + k) % 3], sx + 1, sy + 1, w - 1, 7)
+      rect('#7a706a', sx + 1, sy + 1, w - 1, 1)
+    })
   } else if (qual === 'x') { // chão talhado
     rect('#7a706a', 0, 0, T, 1)
     rect(mancha, 0, 15, T, 1)
@@ -390,8 +495,27 @@ function piso(ctx: CanvasRenderingContext2D, qual: string, x: number, y: number)
     if ((x + y) % 2) rect(mancha, 4, 4, 8, 1), rect(mancha, 4, 11, 8, 1), rect(mancha, 4, 4, 1, 8), rect(mancha, 11, 4, 1, 8)
   } else if (qual === 'v') { // madeira clara
     for (let i = 0; i < 4; i++) rect(mancha, 0, i * 4 + 3, T, 1), rect(mancha, (i * 5 + x * 3) % 16, i * 4, 1, 3)
+  } else if (qual === '=') { // ponte: tábuas atravessadas, corrimãos e contorno
+    for (let i = 0; i < 4; i++) rect(mancha, i * 4 + 3, 3, 1, 10)
+    rect('#c08a4a', 0, 1, T, 1)
+    rect(mancha, 0, 2, T, 1)
+    rect(mancha, 0, 13, T, 2)
+    rect('#1b1410', 0, 0, T, 1)
+    rect('#1b1410', 0, 15, T, 1)
+    if (MAPA[y][x - 1] !== '=') rect('#1b1410', 0, 0, 1, T)
+    if (MAPA[y][x + 1] !== '=') rect('#1b1410', 15, 0, 1, T)
+  } else if (qual === '-') { // ponte de pedra, nos cinzas quentes do calçamento do livre comércio: tijolos em fiadas desencontradas, parapeito só nas bordas de cima e de baixo
+    for (let j = 0; j < 4; j++) {
+      rect(mancha, 0, j * 4 + 3, T, 1)
+      for (let i = (j % 2) * 4; i < T; i += 8) rect(mancha, i, j * 4, 1, 3)
+      rect('#7a6e62', 0, j * 4, T, 1)
+    }
+    if (MAPA[y - 1][x] !== '-') rect('#1b1410', 0, 0, T, 1), rect('#8a7e72', 0, 1, T, 2), rect(mancha, 0, 3, T, 1)
+    if (MAPA[y + 1][x] !== '-') rect('#8a7e72', 0, 12, T, 2), rect(mancha, 0, 14, T, 1), rect('#1b1410', 0, 15, T, 1)
+    if (MAPA[y][x - 1] !== '-') rect('#1b1410', 0, 0, 1, T)
+    if (MAPA[y][x + 1] !== '-') rect('#1b1410', 15, 0, 1, T)
   } else {
-    for (let k = 0; k < 6; k++) rect(mancha, (x * 7 + y * 13 + k * 5) % 15, (x * 3 + y * 11 + k * 7) % 15, qual === 'w' || qual === '=' ? 4 : 1, 1)
+    for (let k = 0; k < 6; k++) rect(mancha, (x * 7 + y * 13 + k * 5) % 15, (x * 3 + y * 11 + k * 7) % 15, qual === 'w' ? 4 : 1, 1)
     if (qual === 'w') rect(mancha, 0, 15, T, 1) // tábuas
   }
   if (qual === '#' && !parede(x, y + 1)) { // face da parede: blocos talhados
@@ -406,23 +530,108 @@ function piso(ctx: CanvasRenderingContext2D, qual: string, x: number, y: number)
   if (qual !== '#' && parede(x, y - 1)) rect('#00000050', 0, 0, T, 3) // sombra da parede
 }
 
-/** Chão com objetos, e por cima dos bonecos as copas das árvores. */
-function desenhaMapa() {
-  const tela = () => Object.assign(document.createElement('canvas'), { width: MAPA[0].length * T, height: MAPA.length * T })
-  const c = tela(), copas = tela()
+/** Rio atravessando a linha de uma parede: rocha nas duas margens. Ali a água despenca. */
+const queda = (x: number, y: number) => {
+  const margem = (d: number) => { let i = x; while (MAPA[y]?.[i] === '~') i += d; return parede(i, y) }
+  return MAPA[y]?.[x] === '~' && margem(-1) && margem(1)
+}
+
+/** Água do rio, redesenhada a cada quadro: reflexos descendo com a correnteza e espuma nas margens. */
+function agua(ctx: CanvasRenderingContext2D, x: number, y: number, agora: number) {
+  const rect = (c: string, rx: number, ry: number, w: number, h: number) => ((ctx.fillStyle = c), ctx.fillRect(x * T + rx, y * T + ry, w, h))
+  const t = agora / 120
+  if (queda(x, y)) { // cachoeira: fios de água caindo rápido e espuma onde bate
+    rect('#3a7ac0', 0, 0, T, T)
+    for (let k = 0; k < 6; k++) {
+      const rx = (k * 3 + x * 5) % 15, ry = (Math.floor(t * 3 + k * 7 + x * 3) % (T + 6)) - 6
+      rect('#a8e6ff', rx, ry, 1, 6)
+      rect('#2a5a9a', rx + 1, ry + 2, 1, 4)
+    }
+    for (let k = 0; k < 6; k++) rect('#e8f8ff', (k * 3 + Math.floor(t) + x) % 15, 12 + ((k + Math.floor(t / 2)) % 4), 2, 1)
+    return
+  }
+  rect('#2a5a9a', 0, 0, T, T)
+  for (let k = 0; k < 3; k++) {
+    const rx = (x * 7 + k * 5) % 10, ry = Math.floor(k * 6 + t + x * 5) % T
+    rect('#5ca8e6', rx, ry, 5, 1)
+    rect('#1e4680', rx + 1, (ry + 3) % T, 4, 1)
+  }
+  if ((Math.floor(t / 4) + x + y) % 5 === 0) rect('#d8f4ff', (x * 3 + y) % 12 + 2, (y * 5) % 12 + 2, 1, 1) // brilho
+  for (const [dx, bx] of [[-1, 0], [1, 15]]) {
+    if ('~=-'.includes(MAPA[y][x + dx])) continue
+    for (let ry = 0; ry < T; ry += 2) rect('#a8e6ff', bx - dx * ((Math.floor(t / 3) + ry / 2 + y) % 2), ry, 1, 2)
+  }
+  if (parede(x, y - 1)) rect('#00000050', 0, 0, T, 3)
+  if ('=-'.includes(MAPA[y - 1][x])) rect('#00000040', 0, 0, T, 2) // sombra da ponte
+  if (queda(x, y - 1)) for (let k = 0; k < 5; k++) rect('#d8f4ff', (k * 3 + Math.floor(t) * 5 + x) % 15, (k + Math.floor(t / 2)) % 4, 2, 1) // respingo ao pé da queda
+}
+
+/** Árvore inteira, tronco e copa, num sprite só: assim a copa entra no Y-sort pelo pé do tronco. */
+function arvore() {
+  const c = Object.assign(document.createElement('canvas'), { width: 32, height: 20 + T })
   const ctx = c.getContext('2d')!
+  pinta(ctx, ARVORE, 8, 20)
+  pinta(ctx, COPA, 0, 0)
+  return c
+}
+
+/** Chão com objetos, e à parte o que entra no Y-sort com os bonecos: árvores e o que se atravessa (trigo, cogumelo, cadeira, flores). */
+function desenhaMapa() {
+  const c = Object.assign(document.createElement('canvas'), { width: MAPA[0].length * T, height: MAPA.length * T })
+  const ctx = c.getContext('2d')!
+  const imgs: Record<string, HTMLCanvasElement> = {}
+  const soltos: { img: HTMLCanvasElement; x: number; y: number; pe: number }[] = []
+  const aves: { quadros: HTMLCanvasElement[]; x: number; y: number }[] = [] // papagaios, desenhados a cada quadro
   const cerca = (x: number, y: number) => MAPA[y]?.[x] === 'f'
-  MAPA.forEach((linha, y) => [...linha].forEach((ch, x) => piso(ctx, ch in PISO ? ch : PAREDE.includes(ch) ? '#' : chao(x, y), x, y)))
+  // cerca é de bicho: sempre em cima de grama, mesmo encostada no Livre Comércio
+  MAPA.forEach((linha, y) => [...linha].forEach((ch, x) => piso(ctx, ch in PISO ? ch : PAREDE.includes(ch) ? '#' : ch === 'f' ? ',' : chao(x, y), x, y)))
   // objetos depois de todo o chão, para os de 2 tiles não serem cobertos pelo piso vizinho
   MAPA.forEach((linha, y) => [...linha].forEach((ch, x) => {
     if (ch === 'f') { // cerca encaixa com as vizinhas: deitada, em pé ou nos dois sentidos no canto
       const v = cerca(x, y - 1) || cerca(x, y + 1)
       if (cerca(x - 1, y) || cerca(x + 1, y) || !v) pinta(ctx, CERCA, x * T, y * T)
       if (v) pinta(ctx, CERCA_V, x * T, y * T)
-    } else if (PROP[ch]) pinta(ctx, PROP[ch], x * T, y * T)
-    if (ch === 'Y') pinta(copas.getContext('2d')!, COPA, x * T - 8, y * T - 20)
+    } else if (PAPAGAIOS[ch]) aves.push({ quadros: PAPAGAIOS[ch].map(sprite), x: x * T, y: y * T })
+    else if (ch === 'Y') soltos.push({ img: (imgs.Y ??= arvore()), x: x * T - 8, y: y * T - 20, pe: y * T + pe(ARVORE) })
+    else if (PROP[ch] && andavel(x, y)) soltos.push({ img: (imgs[ch] ??= sprite(PROP[ch])), x: x * T, y: y * T, pe: y * T + pe(PROP[ch]) })
+    else if (PROP[ch]) pinta(ctx, PROP[ch], x * T, y * T)
   }))
-  return [c, copas]
+  ctx.font = '96px VT323, monospace'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillStyle = '#ffd23b40'
+  for (const [letra, sx, sy] of SALAS) ctx.fillText(letra, sx * T + 8, sy * T + 8)
+  const rio = MAPA.flatMap((linha, y) => [...linha].flatMap((ch, x) => (ch === '~' ? [[x, y]] : [])))
+  return { mapa: c, soltos, rio, aves }
+}
+
+/** Foto da fortaleza inteira, com todo mundo no seu lugar e o nome das zonas. Em dobro, como a tela do jogo. */
+export function mapaInteiro(retrato: (r: Receita) => Grid) {
+  const { mapa, soltos, rio, aves } = desenhaMapa()
+  const c = Object.assign(document.createElement('canvas'), { width: mapa.width * 2, height: mapa.height * 2 })
+  const ctx = c.getContext('2d')!
+  ctx.imageSmoothingEnabled = false
+  ctx.setTransform(2, 0, 0, 2, 0, 0)
+  ctx.drawImage(mapa, 0, 0)
+  for (const [ax, ay] of rio) agua(ctx, ax, ay, 0)
+  for (const a of aves) ctx.drawImage(a.quadros[0], a.x, a.y)
+  const gente = [...RECEITAS.map((r) => ({ g: retrato(r), x: LOCAL[r.id][0], y: LOCAL[r.id][1] })), ...EXTRAS]
+  const bichos = MAPA.flatMap((l, by) => [...l].flatMap((ch, bx) => (BICHO[ch] ? [{ g: BICHO[ch], x: bx, y: by + 1 - BICHO[ch].length / T }] : [])))
+  // mesmo Y-sort do jogo, parado
+  const cena: [number, () => void][] = soltos.map((s) => [s.pe, () => ctx.drawImage(s.img, s.x, s.y)])
+  for (const o of [...gente, ...bichos]) cena.push([o.y * T + pe(o.g), () => pinta(ctx, o.g, o.x * T, o.y * T)])
+  cena.sort((a, b) => a[0] - b[0]).forEach(([, desenha]) => desenha())
+  ctx.setTransform(1, 0, 0, 1, 0, 0)
+  ctx.font = '16px VT323, monospace'
+  ctx.textAlign = 'center'
+  for (const [nome, zx, zy] of ZONAS) {
+    const sx = (zx * T + 8) * 2, sy = (zy * T + 10) * 2
+    ctx.fillStyle = '#000'
+    ctx.fillText(nome, sx + 2, sy + 2)
+    ctx.fillStyle = '#ffd23b'
+    ctx.fillText(nome, sx, sy)
+  }
+  return c
 }
 
 // ---------------------------------------------------------------- jogo
@@ -437,12 +646,12 @@ const DIRECAO: Record<string, [number, number]> = {
 export function modoLivre(palco: HTMLElement, i: number, retrato: (r: Receita) => Grid) {
   const eu = RECEITAS[i]
   const outros = [
-    ...RECEITAS.filter((r) => r !== eu).map((r) => ({ id: r.id, nome: r.cliente, fala: r.fala, x: LOCAL[r.id][0], y: LOCAL[r.id][1], s: 1, img: sprite(retrato(r)) })),
-    ...EXTRAS.map((e) => ({ ...e, img: sprite(e.g) })),
+    ...RECEITAS.filter((r) => r !== eu).map((r) => ({ id: r.id, nome: r.cliente, fala: r.fala, x: LOCAL[r.id][0], y: LOCAL[r.id][1], s: 1, img: sprite(retrato(r)), pe: pe(retrato(r)) })),
+    ...EXTRAS.map((e) => ({ ...e, img: sprite(e.g), pe: pe(e.g) })),
   ]
   const em = (o: (typeof outros)[number], ox: number, oy: number) => ox >= o.x && ox < o.x + o.s && oy >= o.y && oy < o.y + o.s
   // Bichos passeiam sozinhos dentro dos cercados.
-  const bichos = MAPA.flatMap((l, by) => [...l].flatMap((ch, bx) => BICHO[ch] ? [{ x: bx, y: by, w: BICHO[ch][0].length / T, de: [bx, by], t: 1, esq: false, img: sprite(BICHO[ch]), chao: chao(bx, by), tipo: ch }] : []))
+  const bichos = MAPA.flatMap((l, by) => [...l].flatMap((ch, bx) => BICHO[ch] ? [{ x: bx, y: by, w: Math.floor(BICHO[ch][0].length / T), de: [bx, by], t: 1, esq: false, img: sprite(BICHO[ch]), pe: pe(BICHO[ch]), chao: chao(bx, by), tipo: ch }] : []))
   // caixa dos pés do anão (10x8 px na base do sprite): é ela que colide
   const pisa = (tx: number, ty: number, ax = fx, ay = fy) => ax + 3 < (tx + 1) * T && ax + 13 > tx * T && ay + 8 < (ty + 1) * T && ay + 16 > ty * T
   const ocupado = (ox: number, oy: number, eu?: (typeof bichos)[number]) =>
@@ -456,12 +665,16 @@ export function modoLivre(palco: HTMLElement, i: number, retrato: (r: Receita) =
     <canvas width="640" height="360"></canvas>
     <div class="balao"></div>
     <button class="btn btn-gold voltar" data-ir="titulo">Taverna</button>
-    <button class="btn interagir" aria-label="Interagir (E ou Espaço)">✦</button>
+    <button class="btn interagir" aria-label="Interagir (E ou Espaço)">◆</button>
     <div class="dpad">${['ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'].map((k) => `<button class="btn" data-dir="${k}" aria-label="${k}">${{ ArrowUp: '▲', ArrowLeft: '◀', ArrowRight: '▶', ArrowDown: '▼' }[k]}</button>`).join('')}</div>`
   const ctx = palco.querySelector('canvas')!.getContext('2d')!
   const balao = palco.querySelector<HTMLElement>('.balao')!
-  const [mapa, copas] = desenhaMapa()
-  const img = sprite(retrato(eu)), preto = sprite(tinge(retrato(eu), QUEIMADO)), roxo = sprite(tinge(retrato(eu), ENVENENADO))
+  const { mapa, soltos, rio, aves } = desenhaMapa()
+  const peEu = pe(retrato(eu))
+  const trote = TROTE.map(sprite)
+  const passos = [retrato(eu), ...PES.map((p) => [...retrato(eu).slice(0, 14), ...grade(p, { d: '#3a2a18' })])]
+  const quadros = (tons?: string[]) => [0, 1, 0, 2].map((k) => sprite(tons ? tinge(passos[k], tons) : passos[k])) // parado, passo, parado, outro passo
+  const img = quadros(), preto = quadros(QUEIMADO), roxo = quadros(ENVENENADO)
   const botao = palco.querySelector<HTMLButtonElement>('.interagir')!
   const W = mapa.width - 320, H = mapa.height - 180
 
@@ -551,6 +764,11 @@ export function modoLivre(palco: HTMLElement, i: number, retrato: (r: Receita) =
     ctx.imageSmoothingEnabled = false
     ctx.setTransform(2, 0, 0, 2, -cx * 2, -cy * 2)
     ctx.drawImage(mapa, 0, 0)
+    for (const [ax, ay] of rio) agua(ctx, ax, ay, agora)
+    aves.forEach((a, k) => { // cada papagaio bate as asas um pouco a cada 3s, fora de compasso com os vizinhos
+      const t = (agora + k * 1100) % 3000
+      ctx.drawImage(a.quadros[t < 640 ? Math.floor(t / 80) % 4 : 0], a.x, a.y)
+    })
     const boneco = (im: HTMLCanvasElement, bx: number, by: number, esq: boolean) => {
       ctx.save()
       ctx.translate(bx + (esq ? im.width : 0), by)
@@ -561,11 +779,18 @@ export function modoLivre(palco: HTMLElement, i: number, retrato: (r: Receita) =
     const viz = (o: (typeof outros)[number]) => Math.max(o.x - x, x - o.x - o.s + 1, o.y - y, y - o.y - o.s + 1) <= 1
     const perto = outros.find(viz)
     const bichoPerto = (tipo: string) => bichos.find((b) => b.tipo === tipo && Math.max(b.x - x, x - b.x - b.w + 1, Math.abs(b.y - y)) <= 1)
-    outros.forEach((o, k) => boneco(o.img, o.x * T, o.y * T - (Math.floor(agora / 500 + k) % 2), viz(o) && x < o.x))
-    for (const b of bichos) boneco(b.img, meio((b.de[0] + (b.x - b.de[0]) * b.t) * T), meio((b.de[1] + (b.y - b.de[1]) * b.t) * T) + T - b.img.height, b.esq)
-    if (montado) boneco(montado.img, px - 8, py + T - montado.img.height, olhaEsq)
-    boneco(corDe <= agora && agora < corAte ? cor : img, px, py - (montado ? 9 : 0), olhaEsq)
-    ctx.drawImage(copas, 0, 0)
+    // Y-sort: quem tem o pé mais embaixo é desenhado depois, na frente. Objetos entram primeiro, então no empate o boneco ganha.
+    const cena: [number, () => void][] = soltos.map((s) => [s.pe, () => ctx.drawImage(s.img, s.x, s.y)])
+    outros.forEach((o, k) => cena.push([o.y * T + o.pe, () => boneco(o.img, o.x * T, o.y * T - (Math.floor(agora / 500 + k) % 2), viz(o) && x < o.x)]))
+    for (const b of bichos) {
+      const by = meio((b.de[1] + (b.y - b.de[1]) * b.t) * T) + T - b.img.height
+      cena.push([by + b.pe, () => boneco(b.img, meio((b.de[0] + (b.x - b.de[0]) * b.t) * T), by, b.esq)])
+    }
+    cena.push([montado ? py + T - montado.img.height + montado.pe : py + peEu, () => { // montado, anão e cavalo são uma peça só
+      if (montado) boneco(len ? [montado.img, trote[0], montado.img, trote[1]][Math.floor(agora / 90) % 4] : montado.img, px - 8, py + T - montado.img.height, olhaEsq)
+      boneco((corDe <= agora && agora < corAte ? cor : img)[len && !montado ? Math.floor(agora / 130) % 4 : 0], px, py - (montado ? 15 : 0), olhaEsq)
+    }])
+    cena.sort((a, b) => a[0] - b[0]).forEach(([, desenha]) => desenha())
 
     // baforada: bolhas de fogo da boca do dragão até o anão
     const dragao = outros.find((o) => o.id === 'dragao')!

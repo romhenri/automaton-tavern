@@ -1,7 +1,7 @@
 import './style.css'
 import { ERRO, executar } from './afd.ts'
 import { grafo } from './grafo.ts'
-import { modoLivre } from './livre.ts'
+import { mapaInteiro, modoLivre } from './livre.ts'
 import { CAPACIDADE, DRINKS, PACIENCIA, novoTurno, servir, type Turno, type Veredito } from './jogo.ts'
 import { ALFABETO, RECEITAS, type Receita } from './receitas.ts'
 import { BARRIL, LIXEIRA, PEPITA, VOLTAR, canecaSprite, dwarfSprite, icone, svg, type Expressao } from './sprites.ts'
@@ -61,8 +61,22 @@ function escolha() {
       <div class="grade">${RECEITAS.map((r, i) => `
         <button class="btn" data-ir="andar" data-pag="${i}">${svg(retrato(r), 40)}<span>${r.cliente}</span></button>`).join('')}
       </div>
-      <button class="btn btn-gold" data-ir="titulo">Voltar</button>
+      <div class="linha">
+        <button class="btn" data-ir="mapa">Mapa</button>
+        <button class="btn btn-gold" data-ir="titulo">Voltar</button>
+      </div>
     </div>`
+}
+
+/** Modo livre: a fortaleza inteira de uma vez. */
+function mapa() {
+  palco.className = 'tela-ajuda'
+  palco.innerHTML = `
+    <div class="painel mapa">
+      <h2 class="painel-titulo"><button class="btn btn-gold" data-ir="livre" title="Voltar" aria-label="Voltar">${svg(VOLTAR, 16)}</button>Mapa da fortaleza</h2>
+      <div class="mapa-quadro"></div>
+    </div>`
+  $('.mapa-quadro').append(mapaInteiro(retrato))
 }
 
 function ajuda() {
@@ -261,7 +275,7 @@ function comando(cmd: string) {
 
 const TELAS: Record<string, (pag: number) => void> = {
   jogar: jogo, ajuda, almanaque, titulo, fim, fases,
-  livre: escolha,
+  livre: escolha, mapa,
   andar: (i) => modoLivre(palco, i, retrato),
   proximo: () => (nivel++, jogo()),
   nivel: (i) => ((nivel = i), jogo()),
@@ -289,4 +303,6 @@ addEventListener('keydown', (e) => {
   }
 })
 
-titulo()
+// /map abre direto no mapa da fortaleza
+if (location.pathname.replace(/\/$/, '').endsWith('/map')) mapa()
+else titulo()
