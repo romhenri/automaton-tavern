@@ -250,3 +250,7 @@ button { font: inherit; color: inherit; }
 .dpad [data-dir=ArrowLeft] { grid-area: 2 / 1; }
 .dpad [data-dir=ArrowRight] { grid-area: 2 / 3; }
 .dpad [data-dir=ArrowDown] { grid-area: 3 / 2; }
+.mapa { display: grid; gap: 6px; justify-items: center; }
+.mapa .painel-titulo { justify-self: stretch; margin: 0; }
+.mapa .painel-titulo .btn { padding: 1px 4px; min-height: 0; }
+.mapa canvas { display: block; height: 310px; width: auto; border: 2px solid #1b1410; } /* a fortaleza inteira cabe no painel */
