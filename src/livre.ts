@@ -77,6 +77,28 @@ export const LOCAL: Record<string, [number, number]> = {
   formigas: [71, 27], // formigueiro
 }
 
+/** O que cada anão diz pela fortaleza: conversa do dia a dia, sem pedido de drink nem ingrediente. */
+export const FALAS: Record<string, string> = {
+  hidromel: 'Não acorda o dragão. Eu cavo baixinho perto dele há trinta anos.',
+  cerveja: 'Martelo no ombro, escudo no braço. Quem passa pelo quartel treina comigo.',
+  grogue: 'Esse fogo não apaga desde o tempo do meu avô. E não vai apagar no meu.',
+  licor: 'Terra boa é terra trabalhada. O trigo daqui alimenta a fortaleza inteira.',
+  furia: 'Fico de olho na taverna. Briga aqui dentro, eu separo. Briga lá fora, eu assisto.',
+  contra: 'Todo mundo treina de manhã. Eu treino de noite. Alguém tem que ser diferente.',
+  teclados: 'Estou desmontando um relógio élfico. Já entendi tudo, só sobraram sete peças.',
+  nobre: 'Curve-se ao entrar no Salão Nobre. O tapete foi tecido por três gerações.',
+  trapacas: 'Pedra da sorte, autêntica! Só um pouco pintada. Faço preço bom pra você.',
+  lampadas: 'Acendo cada lanterna da fortaleza antes do sino. Sem mim, todo mundo tropeça.',
+  moderado: 'Não compre nada do meu irmão. Compre de mim. A diferença é que eu devolvo o troco.',
+  comprido: 'Daqui de cima eu vejo a fazenda inteira. É a vantagem de ser comprido.',
+  mari: 'Cuidado com a cobra. Ela é mansa, mas só comigo.',
+  aquecido: 'Agora cuido dos papéis da fortaleza. Receita de remédio ou recibo, a letra é a mesma.',
+  pontes: 'Essa ponte aguenta um mamute. Testei com três anões pulando.',
+  papagaios: 'Diga oi pros meus papagaios. Mas cuidado: eles repetem os segredos também.',
+  scarlett: 'O palco é meu até a última música. Depois disso, ainda é meu.',
+  formigas: 'Cada formiga aqui tem nome. Estou na de número quatrocentos e doze.',
+}
+
 const ZONAS: [string, number, number][] = [
   ['Mina', 7, 1], ['Quartel', 69.5, 12], ['Forja', 22.5, 1], ['Salão Nobre', 69.5, 9], ['Fazenda', 28, 21], ['Taverna', 53.5, 11],
   ['Biblioteca', 45.5, 2], ['Alquimista', 34, 1], ['Jardim', 7.5, 21], ['Animais', 53.5, 21], ['Cozinha', 57.5, 2], ['Formigueiro', 72.5, 24],
@@ -646,7 +668,7 @@ const DIRECAO: Record<string, [number, number]> = {
 export function modoLivre(palco: HTMLElement, i: number, retrato: (r: Receita) => Grid) {
   const eu = RECEITAS[i]
   const outros = [
-    ...RECEITAS.filter((r) => r !== eu).map((r) => ({ id: r.id, nome: r.cliente, fala: r.fala, x: LOCAL[r.id][0], y: LOCAL[r.id][1], s: 1, img: sprite(retrato(r)), pe: pe(retrato(r)) })),
+    ...RECEITAS.filter((r) => r !== eu).map((r) => ({ id: r.id, nome: r.cliente, fala: FALAS[r.id], x: LOCAL[r.id][0], y: LOCAL[r.id][1], s: 1, img: sprite(retrato(r)), pe: pe(retrato(r)) })),
     ...EXTRAS.map((e) => ({ ...e, img: sprite(e.g), pe: pe(e.g) })),
   ]
   const em = (o: (typeof outros)[number], ox: number, oy: number) => ox >= o.x && ox < o.x + o.s && oy >= o.y && oy < o.y + o.s

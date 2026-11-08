@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest'
-import { EXTRAS, INICIO, LOCAL, MAPA, andavel } from './livre.ts'
-import { RECEITAS } from './receitas.ts'
+import { EXTRAS, FALAS, INICIO, LOCAL, MAPA, andavel } from './livre.ts'
+import { ALFABETO, RECEITAS } from './receitas.ts'
 
 it('todo anão está num piso livre, alcançável a partir da taverna', () => {
   expect(MAPA.every((l) => l.length === MAPA[0].length)).toBe(true)
@@ -21,4 +21,17 @@ it('todo anão está num piso livre, alcançável a partir da taverna', () => {
   // bichos (P, G) ficam presos nos cercados: a taverna não chega neles
   MAPA.forEach((l, y) => [...l].forEach((ch, x) => 'PGh'.includes(ch) && expect(visto.has(String([x, y]))).toBe(false)))
   for (const [x, y] of lugares) expect([[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => visto.has(String([x + dx, y + dy])))).toBe(true)
+})
+
+it('pela fortaleza cada anão tem fala própria, sem drink nem ingrediente', () => {
+  // nomes inteiros de receita, ingredientes (e plural) e palavras de bebida, sempre como palavra inteira
+  const ingredientes = ALFABETO.filter((a) => !a.acao).flatMap((a) => [a.nome, a.nome.replace(/s$/, '')])
+  const bebida = ['drink', 'bebida', 'beber', 'caneca', 'gole', 'cerveja', 'hidromel', 'licor', 'grogue', 'taça']
+  const proibidas = [...RECEITAS.map((r) => r.nome), ...ingredientes, ...bebida].map((w) => w.toLowerCase())
+  const tem = (frase: string, w: string) => new RegExp(`(^|[^a-zà-ú])${w}([^a-zà-ú]|$)`).test(frase)
+  for (const r of RECEITAS) {
+    expect(FALAS[r.id], r.id).toBeTruthy()
+    expect(FALAS[r.id]).not.toBe(r.fala)
+    for (const w of proibidas) expect(tem(FALAS[r.id].toLowerCase(), w), `${r.id}: ${w}`).toBe(false)
+  }
 })
