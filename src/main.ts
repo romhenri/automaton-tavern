@@ -27,9 +27,14 @@ const ouro = (n: number) => `${svg(PEPITA, 14, 'pepita')}${n}`
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`)
 
 // Resolução base 320x180 em dobro (640x360), escalada por inteiro.
+// No celular a escala é fracionária para ocupar a tela, e em pé o palco gira 90° para jogar deitado.
+const toque = matchMedia('(pointer: coarse)')
 function escala() {
-  const k = Math.min(innerWidth / 640, innerHeight / 360)
-  document.documentElement.style.setProperty('--escala', String(k >= 1 ? Math.floor(k) : k))
+  const giro = toque.matches && innerHeight > innerWidth
+  const [w, h] = giro ? [innerHeight, innerWidth] : [innerWidth, innerHeight]
+  const k = Math.min(w / 640, h / 360)
+  document.documentElement.style.setProperty('--escala', String(k >= 1 && !toque.matches ? Math.floor(k) : k))
+  document.documentElement.style.setProperty('--giro', giro ? '90deg' : '0deg')
 }
 addEventListener('resize', escala)
 escala()
