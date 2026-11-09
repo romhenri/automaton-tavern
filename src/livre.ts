@@ -79,7 +79,7 @@ export const LOCAL: Record<string, [number, number]> = {
   lampadas: [29, 43], // lampiões do livre comércio
   moderado: [50, 47], // livre comércio
   comprido: [25, 30], // fazenda
-  mari: [6, 30], // jardim
+  mari: [86, 21], // atelier
   aquecido: [23, 21], // administração
   pontes: [40, 31], // ponte
   papagaios: [49, 31], // animais
@@ -101,7 +101,7 @@ export const FALAS: Record<string, string> = {
   lampadas: 'Acendo cada lanterna da fortaleza antes do sino. Sem mim, todo mundo tropeça.',
   moderado: 'Não compre nada do meu irmão. Compre de mim. A diferença é que eu devolvo o troco.',
   comprido: 'Daqui de cima eu vejo a fazenda inteira. É a vantagem de ser comprido.',
-  mari: 'Cuidado com a cobra. Ela é mansa, mas só comigo.',
+  mari: 'Costura de anão aguenta machado, fogo e tombo de escada. Só não aguenta pressa.',
   aquecido: 'Agora cuido dos papéis da fortaleza. Receita de remédio ou recibo, a letra é a mesma.',
   pontes: 'Essa ponte aguenta um mamute. Testei com três anões pulando.',
   papagaios: 'Diga oi pros meus papagaios. Mas cuidado: eles repetem os segredos também.',
