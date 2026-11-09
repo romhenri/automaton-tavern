@@ -40,6 +40,7 @@ button { font: inherit; color: inherit; }
 /* ---------------------------------------------------------------- palco 640x360 escalado */
 #palco { /* fixo no centro: o tamanho sem escala (640x360) não empurra a página nem o viewport do celular */
   position: fixed; left: 50%; top: 50%; margin: -180px 0 0 -320px; width: 640px; height: 360px; overflow: hidden;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; /* jogo, não página: nada de seleção nem menu de toque longo */
   transform: rotate(var(--giro)) scale(var(--escala));
   background:
     radial-gradient(ellipse at 85% 110%, #ff8a2a30 0%, transparent 45%),
