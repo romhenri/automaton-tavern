@@ -6,7 +6,7 @@ it('todo anão está num piso livre, alcançável a partir da taverna', () => {
   expect(MAPA.every((l) => l.length === MAPA[0].length)).toBe(true)
   const lugares = [
     ...RECEITAS.map((r) => LOCAL[r.id]),
-    ...EXTRAS.flatMap((e) => Array.from({ length: e.s * e.s }, (_, k): [number, number] => [e.x + (k % e.s), e.y + Math.floor(k / e.s)])),
+    ...EXTRAS.filter((e) => !('preso' in e)).flatMap((e) => Array.from({ length: e.s * e.s }, (_, k): [number, number] => [e.x + (k % e.s), e.y + Math.floor(k / e.s)])),
   ]
   const ocupado = new Set(lugares.map(String))
   lugares.forEach(([x, y]) => expect(andavel(x, y)).toBe(true))

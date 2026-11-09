@@ -494,6 +494,8 @@ const ORC = compose([[
   '........', '...kkkkk', '..kggggg', '.kgggggg', '.kgkkggg', '.kggeggg', '.kgggggg', '..kgwkkk',
   '..kkgggg', '.kAAAAAA', 'kgkAaAAA', 'kgkAAAaA', 'kkkAAAAA', '...kddkk', '...kddk.', '...kkkk.',
 ]], { g: '#5a7a3a', e: '#ff3b2f', w: '#f4ecd8', A: '#4a4a52', a: '#8a8f99', d: '#3a2a18' })
+// Kobold: lagartinho de escamas cor de ferrugem, chifres claros e olhos amarelos.
+const KOBOLD = compose([['........', '..k.....', '..kh....', '...khkkk', '...krrrr', '..krrerr', '..krrrrr', '...krrRR', '....kkkk', '...kbbbb', '..krbbbb', '..krbbbb', '...kbbbb', '....krrk', '....krrk', '....kkkk']], { r: '#a8502a', R: '#d88a5a', h: '#e8d8a8', e: '#ffe14a', b: '#5a3a1a' })
 export const EXTRAS = [
   { id: 'goblin', nome: 'Grishnak, o Goblin', fala: 'Psiu... troco ouro de anão por um gole. Ninguém precisa saber.', x: 45, y: 41, s: 1, g: GOBLIN },
   { id: 'elfo', nome: 'Elandor, o Elfo', fala: 'Vim provar a cerveja anã. Dizem que é melhor que vinho élfico. Duvido.', x: 8, y: 33, s: 1, g: ELFO },
@@ -501,6 +503,9 @@ export const EXTRAS = [
   { id: 'grot', nome: 'Grot, o Goblin', fala: 'Não olha pra minha barraca. Olha pra lá. ...Pronto, já era.', x: 53, y: 47, s: 1, g: GOBLIN },
   { id: 'orc', nome: 'Urzog, o Orc', fala: 'Orc quer cerveja. Orc paga com... respeito.', x: 32, y: 47, s: 1, g: ORC },
   { id: 'dragao', nome: 'Ignaroth, o Dragão', fala: 'Zzz... quem chega perto do meu ouro? ...Ah, só um anão. Zzz.', x: 9, y: 8, s: 2, g: DRAGAO },
+  // presos: atrás da grade, ninguém chega neles; dá para conversar do corredor
+  { id: 'preso-goblin', nome: 'Grizzle, o Goblin', fala: 'Eu só peguei emprestado! Fala com o guarda, vai. Eu divido com você.', x: 84, y: 3, s: 1, g: GOBLIN, preso: true },
+  { id: 'kobold', nome: 'Skrit, o Kobold', fala: 'Skrit não cavou túnel nenhum. Skrit só estava... testando a parede.', x: 92, y: 3, s: 1, g: KOBOLD, preso: true },
 ]
 
 function pinta(ctx: CanvasRenderingContext2D, g: Grid, x: number, y: number) {
@@ -833,7 +838,7 @@ export function modoLivre(palco: HTMLElement, i: number, retrato: (r: Receita) =
       ctx.drawImage(im, 0, 0)
       ctx.restore()
     }
-    const viz = (o: (typeof outros)[number]) => Math.max(o.x - x, x - o.x - o.s + 1, o.y - y, y - o.y - o.s + 1) <= 1
+    const viz = (o: (typeof outros)[number]) => Math.max(o.x - x, x - o.x - o.s + 1, o.y - y, y - o.y - o.s + 1) <= ('preso' in o ? 2 : 1) // preso fala através da grade
     const perto = outros.find(viz)
     const bichoPerto = (tipo: string) => bichos.find((b) => b.tipo === tipo && Math.max(b.x - x, x - b.x - b.w + 1, Math.abs(b.y - y)) <= 1)
     // Y-sort: quem tem o pé mais embaixo é desenhado depois, na frente. Objetos entram primeiro, então no empate o boneco ganha.
