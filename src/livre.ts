@@ -4,77 +4,87 @@ import { BARRIL, PEPITA, compose, dwarfSprite, icone, type Grid } from './sprite
 
 // Um caractere por tile de 16x16. Gerado à mão: salas separadas por rocha, com portas.
 export const MAPA = [
-  '##############################################################################',
-  '#.5..6..$....9.#pBpN+FFFpN+Bpp#|||||||#EEEEEEEEEEEEEE#N+wwwN+w#EEEEErrrrEEEEE#',
-  '#.....7....$..7#ppp++pppp++ppp#sssssss#vvvvvvvvvvvvvv#++www++w#x^xxxrrrrxxx^x#',
-  '#5..6......$.8.#pppppppppppppp#s>s>s>s#vEEEvvvvvvEEEv#wCwwwCww#xxxxxrrrrxxxxx#',
-  '#..9.7.........pppppIpppIppppp#sssssss#vvvvvvvvvvvvvv#wwwwwwww#xxxxxrrrrxxxxx#',
-  '#..8........6..#pjpppppppppppp#ssCsCss#vvv;;;vv;;;vvv#ww]++www#xxTxxrrrrxxTxx#',
-  '#..7..5..8.7..6#pjppppppppppqq#sssssss#vvv]++vv]++vvv#cw;w;wBw#xxxxxrrrrxxxxx#',
-  '#..5.....895...#ypppIpppIppppp#s>sss>s#vvv;;;vv;;;vvv#bwwwwwBw#xxxxxrrrrxxxxx#',
-  '#9....6........#ppypppppppppqq#sssssss#vvvvvvvvvvvvvv#Uwwwwwww#x^xxxrrrrxxx^x#',
-  '#.9.7...5..6..8#pBpppppppppBpp#|sssss|#EEEvvvvvvvvEEE#EEwwwEEw#xxxxxxxxxxxxxx#',
-  '######################pp#########sss######vv############ww##########xxxx######',
-  '#ww}}ww<www<<ww#EE??EEvvEE??EE#uxxxxxxxxBxxxx#BBwRORORORwrrrrr#xSHMXxxxxSHMXx#',
-  '#wwwwwwwwwwwwww#vvvvvvvvvvvvvv#xxxxxxxxxxxxxx#Bwwwwwwwwwwrr!rr#xxxxxxxxxxxxxx#',
-  '#w{www{www{wwww#v*v*vvvvvv*v*v#x;;;xxxxxx;;;x#wwAWAWAWAwwwwwww#xxDxxxxDxxxDxx#',
-  '#wwwwwwwwwwwwwwwv;v;vvvvvv;v;vvx]++xxxxxx]++xwwwwwwwwwwwww;;ww#xxxxxxxxxxxxxx#',
-  '#wwwwwwwwwwwwww#vvvvvvvvvvvvvvvx;;;xxxxxx;;;xwww;;;wwwwwww[+ww#xxxxxxxxxxxxxx#',
-  '#w{www{www{wwww#v*v*vvvvvv*v*vvxxxxxxxxxxxxxx#ww]++ww;;;ww;;ww#xxxxxxxxxxxxxx#',
-  '#wwwwwwwwwwwwww#v;v;vvvvvv;v;v#xxxxxxxxxxxxxx#ww;;;ww]++wwwwww#xxDxxxxDxxxDxx#',
-  '#wwwwwwwwwwwwww#vvvvvvvvvvvvvv#xxxxxxxxxxxxxx#wwwwwww;;;wwwwww#xxxxxxxxxxxxxx#',
-  '#w<<w}}ww}}w<<w#??vvvvvvvvvv??#uxxxxxxxxxxxBu#wwwwwwwwwwwwwwBB#xxxxxxxxxxxxxx#',
-  '#######ww###########################xx####################ww########xxxx######',
-  '#,,,,l,,,,l,,,l,,,,,,,,,,,,,,,,,,,,,,,,,,~~~Y,,,,,,,,,,,,,,,,iii,,,,,,,,,,,,,#',
-  '#,,,,,,,,,,u,,,,u,,,,,,,,,,,,,,,,,,,,,,,u~~~,,,,,,,,,,,,,,,,,,,,,,,,,,/,,,,,,#',
-  '#,,,,,,,,,z,,,,,,,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,@,&,%,V,,,,,,,,,,,,/,,,,,,,/,,#',
-  '#,,,l,,,l,,l,,l,,l,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,,,,,,,,,,,,,,,,,,,,,,,aQaaaQ#',
-  '#,,,,,,,,,,,,,,,,,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,,,,,,,,,,,,,,,,,,,,,,a5aaaaa#',
-  '#,,Y,,,,,,l,,l,,,,,,c,,c,,c,,c,,c,,c,,c,,===,,,,,,,,,,,,,,,,,,,,,,,/,aaaaaQaa#',
-  '#,,,,,l,,,,,,,,,l,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,ffffffffffffffff,,,,maaaaamQ#',
-  '#,,,,,,,,,,,,,,,,,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,f,,P,f,h,,f,,G,f,,,,aaaaaaaa#',
-  '#,,,,l,,l,,Y,,l,,l,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,f,P,,f,,h,fGG,,f,/,,,QaaQa5a#',
-  '#,,,Y,u,,u,,,,u,,Y,,,,,,,,,,,,,,,,,,,,,,,~~~Yu,,,ffffffffffffffff,,,/,,aQaaaa#',
-  '#,,,,,,,,,,,,,,,ppppppppppppppppppppppppp~~~pppppppppppppppppp,,,/,,,,,,,,,,/#',
-  '#,Y,,,,,,,Y,,,l,Bpppppppppppppppppppppppp~~~pppppppppppppppppB,,/Y,,,,,/,,Y,,#',
-  '#,,,e,,,,,,,,l,,ppJ+ppppK+pppppppJ+pppppp~~~ppppZ+ppppJ+pppppp,,,,l,,,,,,,,,,#',
-  '#,g,,,,,,,,,,,,,pp++pppp++ppppppp++pppppp~~~pppp++pppp++pppppp,,,,,,/,,,,l,,,#',
-  '#n,,,g,,,Y,,l,,,ppppppppppppppppppppppppp~~~pppppppppppppppppp,,,,,,,,,,,,,,/#',
-  '#,,e,,,,n,,,,,l,pppppppppppppppppppp(+ppp---pppppppppppp(+pppp,,,/,,,,,,Y,,,,#',
-  '#g,e,,,g,,,,,,,,pBppppppppppppppppppppppp---ppppppppppppppppBp,,,,,,l,,,,,,,,#',
-  '#,e,n,,,,,,,,,,,pppppK+ppppZ+pppppppK+ppp---pppppppJ+ppppK+ppp,,,,,,,,/,,,/,,#',
-  '#,,g,ee,n,,,,l,,ppppp++pppp++ppppppp++ppp~~~ppppppp++pppp++ppp,,,,,,,Y,,,,,,,#',
-  '#n,,e,n,,,Y,,,,,ppppppppppppppppppppppppp~~~pppppppppppppppppp,,,,,,,,l,,/,,,#',
-  '#,g,,e,,,g,,,,l,ppppppp(+pppppppppppppppp~~~pp(+pppppppppppppp,/,,Y,,,,,,,,l,#',
-  '#g,g,,ne,,,,l,,,Bpppppppppppppppppppppppp~~~pppppppppppppppppB,,,,,,/,,,,,,,,#',
-  '##############################################################################',
+  '################################################################################################',
+  '#6.......5.....#||||||||||||||#k+?w?k+wk+?k+?ww?k+?k+#_s_s_s_s#?"$"?"qq"?"$"?#úxxx#úxx#úxx#úxxx#',
+  '#..7...........#ssssssssssssss#wwwwwwwwwwwwwwwwwwwwww#ssssssss#xxxxxxxxxxxxxx#xxxx#xxx#xxx#xxxx#',
+  '#...........8..#s>s>sCssCs>s>s#wwwwwwwwwwwwwwwwwwwwwwwssssssss#"5xy"xxxx"yx5"#xxxx#xxx#xxx#xxxx#',
+  '#....9.........#ssssssssssssss#wwwwwwwwwwwwwwwwwwwwww#ssssssss#xxxxxxxxxxxxxx#íííí#ííí#ííí#íííí#',
+  '#............5.#|s>ssssss>ssss#k+wwwk+wk+?k+?ww?k+?k+#0s0s:s:s#?"$xxxxxxxx$"?#xxxxxxxxxxxxxxxxx#',
+  '#..............#############ss###www#################################ü+###################xx####',
+  '#.5..6..$....9.#pBpN+FFFpN+Bpp#uxxxxxu#EEEEEEEEEEEEEE#N+wwwN+w#xxxxxxxxxxxxxxxxxxxxxxx#SHMxxXSH#',
+  '#.....7....$..7#ppp++pppp++ppp#xxxxxxx#vvvvvvvvvvvvvv#++www++w#x^`^xxxxxx`^xx^`^xx`^`x#xxxxxxxx#',
+  '#5..6......$.8.#pppppppppppppp#xxxxxxx#vEEEvvvvvvEEEv#wCwwwCww#xxxxxxxxxxxxxxxxxxxxxxx#x;T;xxx?#',
+  '#..9.7.........pppppIpppIppppp#Bxxxxxx#vvvvvvvvvvvvvv#wwwwwwww#xqyxxxxxxxyqyxxxqqxxyqx#xxxxxxxx#',
+  '#..8........6..#pjpppppppppppp#uxxxxxu#vvv;;;vv;;;vvv#ww]++www#xxxxxxxxxxxxxxxxxxxxxxx#xxxxxxxx#',
+  '#..7..5..8.7..6#pjppppppppppqq#xxxxxxB#vvv]++vv]++vvv#cw;w;wBw#xx))xxxxxx)`xx)))xx`)`x#k+xxxxxB#',
+  '#..5.....895...#ypppIpppIppppp#xxxxxxx#vvv;;;vv;;;vvv#bwwwwwBw#xxxxxxxxxxxxxxxxxxxxxxx#xxxxxxxx#',
+  '#9....6........#ppypppppppppqq#xxxxxxx#vvvvvvvvvvvvvv#Uwwwwwww#x`^`xxxxxxx^^xx`^`xx^`x#xxxxxxxx#',
+  '#.9.7...5..6..8#pBpppppppppBpp#uxxxxxu#EEEvvvvvvvvEEE#EEwwwEEw#xxxxxxxxxxxxxxxxxxxxxxx#Bxxxxxx?#',
+  '######################pp#########xxx######vv############ww##########xxxx###################xxx##',
+  '#ww}}ww<www<<ww#EE??EEvvEE??EE#uxxxxxxxxBxxxx#BBwRORORORwrrrrr#xSHMXxxxxSHMXx#k+xk+#éwéwé#uxxxu#',
+  '#wwwwwwwwwwwwww#vvvvvvvvvvvvvv#xxxxxxxxxxxxxx#Bwwwwwwwwwwrr!rr#xxxxxxxxxxxxxx#?xxx?#wwwww#xxxxx#',
+  '#w{www{www{wwww#v*v*vvvvvv*v*v#x;;;xxxxxx;;;x#wwAWAWAWAwwwwwww#xxDxxxxDxxxDxx#k+xk+#áwáwá#xxxxx#',
+  '#wwwwwwwwwwwwwwwv;v;vvvvvv;v;vvx]++xxxxxx]++xwwwwwwwwwwwww;;ww#xxxxxxxxxxxxxxxxxxk+#wwwwwwxxxxx#',
+  '#wwwwwwwwwwwwww#vvvvvvvvvvvvvvvx;;;xxxxxx;;;xwww;;;wwwwwww[+ww#xxxxxxxxxxxxxxxxxxx?#wwwwwwxxxxu#',
+  '#w{www{www{wwww#v*v*vvvvvv*v*vvxxxxxxxxxxxxxx#ww]++ww;;;ww;;ww#xxxxxxxxxxxxxxxxxxk+#wwwwwwxxxxB#',
+  '#wwwwwwwwwwwwww#v;v;vvvvvv;v;v#xxxxxxxxxxxxxx#ww;;;ww]++wwwwww#xxDxxxxDxxxDxx#k+xk+#áwáwá#xxxxx#',
+  '#wwwwwwwwwwwwww#vvvvvvvvvvvvvv#xxxxxxxxxxxxxx#wwwwwww;;;wwwwww#xxxxxxxxxxxxxx#?xxx?#wwwww#xxxxx#',
+  '#w<<w}}ww}}w<<w#??vvvvvvvvvv??#uxxxxxxxxxxxBu#wwwwwwwwwwwwwwBB#xxxxxxxxxxxxxx#k+xk+#ówéwó#uxxxu#',
+  '#######ww###########################xx####################ww########xxxx###################xxx##',
+  '#,,,,l,,,,l,,,l,,,,,,,,,,,,,,,,,,,,,,,,,,~~~Y,,,,,,,,,,,,,,,,iii,,,,,,,,,,,,,,,,,,,,,,,/,,,,,,,#',
+  '#,,,,,,,,,,u,,,,u,,,,,,,,,,,,,,,,,,,,,,,u~~~,,,,,,,,,,,,,,,,,,,,,,,,,,/,,,,,,,,,,,,,Y,,,,,/,,,,#',
+  '#,,,,,,,,,z,,,,,,,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,@,&,%,V,,,,,,,,,,,,/,,,,,,,/,,,,Y,,/,,,,,,,,,Y,,#',
+  '#,,,l,,,l,,l,,l,,l,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,aQaaaa#',
+  '#,,,,,,,,,,,,,,,,,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,/,,l,a5Qaaaa#',
+  '#,,Y,,,,,,l,,l,,,,,,c,,c,,c,,c,,c,,c,,c,,===,,,,,,,,,,,,,,,,,,,,,,,/,,,,,,,,,,,,,,,,,,,aaaaaQaa#',
+  '#,,,,,l,,,,,,,,,l,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,ffffffffffffffff,,,,,,,,,,,,,,l,,,,,,,maaaaamQ#',
+  '#,,,,,,,,,,,,,,,,,,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,f,,P,f,h,,f,,G,f,,,,,,,,,,,,,,,,Y,,,,,aaaaaaaa#',
+  '#,,,,l,,l,,Y,,l,,l,,c,,c,,c,,c,,c,,c,,c,,~~~,,,,,f,P,,f,,h,fGG,,f,/,,,,,,,,,,,,,,,,/,,,,QaaQa5a#',
+  '#,,,Y,u,,u,,,,u,,Y,,,,,,,,,,,,,,,,,,,,,,,~~~Yu,,,ffffffffffffffff,,,/,,,,,,,,,,,,,,,,,,,,aQaaaa#',
+  '#,,,,,,,,,,,,,,,ppppppppppppppppppppppppp~~~pppppppppppppppppp,,,/,,,,,,,,,,/,,,,,,,,,,,,,,Y,,,#',
+  '#,Y,,,,,,,Y,,,l,Bpppppppppppppppppppppppp~~~pppppppppppppppppB,,/Y,,,,,/,,Y,,,,,,Y,,,,,,,,,,,,,#',
+  '#,,,e,,,,,,,,l,,ppJ+ppppK+pppppppJ+pppppp~~~ppppZ+ppppJ+pppppp,,,,l,,,,,,,,,,,,,,,,,,l,,,,/,l,,#',
+  '#,g,,,,,,,,,,,,,pp++pppp++ppppppp++pppppp~~~pppp++pppp++pppppp,,,,,,/,,,,l,,,,,,,,/,,,,,,,,,,,,#',
+  '#n,,,g,,,Y,,l,,,ppppppppppppppppppppppppp~~~pppppppppppppppppp,,,,,,,,,,,,,,/,,/,,,,,,,,,,,,,,,#',
+  '#,,e,,,,n,,,,,l,pppppppppppppppppppp(+ppp---pppppppppppp(+pppp,,,/,,,,,,Y,,,,,,,,l,,Y,,,,,l,,,,#',
+  '#g,e,,,g,,,,,,,,pBppppppppppppppppppppppp---ppppppppppppppppBp,,,,,,l,,,,,,,,,,Y,,,,,,,,,,,,,,,#',
+  '#,e,n,,,,,,,,,,,pppppK+ppppZ+pppppppK+ppp---pppppppJ+ppppK+ppp,,,,,,,,/,,,/,,,,,,,,,,,,,,,,/,,,#',
+  '#,,g,ee,n,,,,l,,ppppp++pppp++ppppppp++ppp~~~ppppppp++pppp++ppp,,,,,,,Y,,,,,,,,/,,,,,,,,,,,,,,/,#',
+  '#n,,e,n,,,Y,,,,,ppppppppppppppppppppppppp~~~pppppppppppppppppp,,,,,,,,l,,/,,,,,,,,,Y,,,,/,,,,,,#',
+  '#,g,,e,,,g,,,,l,ppppppp(+pppppppppppppppp~~~pp(+pppppppppppppp,/,,Y,,,,,,,,l,,,,,,,,,,,,,,Y,,,,#',
+  '#g,g,,ne,,,,l,,,Bpppppppppppppppppppppppp~~~pppppppppppppppppB,,,,,,/,,,,,,,,,,,,,,,,/,,,,,,,,,#',
+  '#,,,,,,,,,/,,,/,,,,,,,,,,,,,,,,,,,,,,,,,,~~~,,,,,,,,,,,,,,,,,,,,,/,,,,,,,,,,,,,,,,Y,,,,,,,,,,,,#',
+  '#,nl,,le,,,,/,,,l,,,,,,l,/,,,,,,,,,,,,,,,~~~,,,,,,,,,/,,,l,,,,,,,,,,Y,,,,,,,,/,,,,,,/,,,,Y,,,,,#',
+  '#,,,,n,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,~~~,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,l,,/,,,,,,,,,,,Y#',
+  '#Y,g,,,Y,,,,Y,,,,/,,,,,,,,,,/,,/,/,,,,/,,~~~,,,,,,,/,,,,,,,,,,,l,,,,,,,,,Y,,,Y,,,,,,,,l,,,,/,,,#',
+  '################################################################################################',
 ]
 const T = 16
 const PAREDE = '#o1234' // rocha e veios de minério
-const SOLIDO = PAREDE + '~BTFLbfENIYuDSHMXJKZmCUROAW$@&%56789!^(+[]jqyi{}<*?>|' // P, G, h (ovelha), Q, V e z são bichos: o chão embaixo é livre, eles é que ocupam. Trigo (c), cogumelos (g, e, n), mato (/) e cadeira (;) se atravessam.
+const SOLIDO = PAREDE + '~BTFLbfENIYuDSHMXJKZmCUROAW$@&%56789!^(+[]jqyi{}<*?>|k"0_:`)áéóíúü' // P, G, h (ovelha), Q, V e z são bichos: o chão embaixo é livre, eles é que ocupam. Trigo (c), cogumelos (g, e, n), mato (/) e cadeira (;) se atravessam.
 // Objetos maiores que um tile ficam com a letra no canto de cima à esquerda e '+' no resto.
-export const INICIO: [number, number] = [54, 15] // meio da taverna
+export const INICIO: [number, number] = [54, 21] // meio da taverna
 
 /** Onde cada anão fica, perto do que faz. */
 export const LOCAL: Record<string, [number, number]> = {
-  hidromel: [7, 4], // mina
-  cerveja: [67, 14], // quartel
-  grogue: [22, 3], // forja
-  licor: [22, 28], // fazenda
-  furia: [49, 12], // barris da taverna
-  contra: [72, 17], // quartel
-  teclados: [45, 4], // biblioteca
-  nobre: [70, 2], // salão nobre
-  trapacas: [25, 36], // livre comércio
-  lampadas: [29, 37], // lampiões do livre comércio
-  moderado: [50, 41], // livre comércio
-  comprido: [25, 24], // fazenda
-  mari: [6, 24], // jardim
-  aquecido: [23, 15], // administração
-  pontes: [40, 25], // ponte
-  papagaios: [49, 25], // animais
-  scarlett: [60, 12], // palco da taverna
-  formigas: [71, 27], // formigueiro
+  hidromel: [7, 10], // mina
+  cerveja: [67, 20], // quartel
+  grogue: [22, 9], // forja
+  licor: [22, 34], // fazenda
+  furia: [49, 18], // barris da taverna
+  contra: [72, 23], // quartel
+  teclados: [45, 10], // biblioteca
+  nobre: [70, 8], // museu
+  trapacas: [25, 42], // livre comércio
+  lampadas: [29, 43], // lampiões do livre comércio
+  moderado: [50, 47], // livre comércio
+  comprido: [25, 30], // fazenda
+  mari: [6, 30], // jardim
+  aquecido: [23, 21], // administração
+  pontes: [40, 31], // ponte
+  papagaios: [49, 31], // animais
+  scarlett: [60, 18], // palco da taverna
+  formigas: [89, 33], // formigueiro
 }
 
 /** O que cada anão diz pela fortaleza: conversa do dia a dia, sem pedido de drink nem ingrediente. */
@@ -86,7 +96,7 @@ export const FALAS: Record<string, string> = {
   furia: 'Fico de olho na taverna. Briga aqui dentro, eu separo. Briga lá fora, eu assisto.',
   contra: 'Todo mundo treina de manhã. Eu treino de noite. Alguém tem que ser diferente.',
   teclados: 'Estou desmontando um relógio élfico. Já entendi tudo, só sobraram sete peças.',
-  nobre: 'Curve-se ao entrar no Salão Nobre. O tapete foi tecido por três gerações.',
+  nobre: 'Cada peça deste museu tem história. A maioria fui eu que trouxe, e não pergunte como.',
   trapacas: 'Pedra da sorte, autêntica! Só um pouco pintada. Faço preço bom pra você.',
   lampadas: 'Acendo cada lanterna da fortaleza antes do sino. Sem mim, todo mundo tropeça.',
   moderado: 'Não compre nada do meu irmão. Compre de mim. A diferença é que eu devolvo o troco.',
@@ -100,13 +110,13 @@ export const FALAS: Record<string, string> = {
 }
 
 const ZONAS: [string, number, number][] = [
-  ['Mina', 7, 1], ['Quartel', 69.5, 12], ['Forja', 22.5, 1], ['Salão Nobre', 69.5, 9], ['Fazenda', 28, 21], ['Taverna', 53.5, 11],
-  ['Biblioteca', 45.5, 2], ['Alquimista', 34, 1], ['Jardim', 7.5, 21], ['Animais', 53.5, 21], ['Cozinha', 57.5, 2], ['Formigueiro', 72.5, 24],
-  ['Livre Comércio', 38.5, 32], ['Cogumelos', 5, 33], ['Carpintaria', 7.5, 11], ['Área Comum', 37.5, 11], ['Administração', 22.5, 11],
+  ['Mina', 7, 1], ['Quartel', 69.5, 18], ['Forja', 22.5, 7], ['Museu', 74, 15], ['Fazenda', 28, 27], ['Taverna', 53.5, 17],
+  ['Biblioteca', 45.5, 8], ['Alquimista', 22.5, 1], ['Jardim', 7.5, 27], ['Animais', 53.5, 27], ['Cozinha', 57.5, 8], ['Formigueiro', 90.5, 30],
+  ['Livre Comércio', 38.5, 38], ['Cogumelos', 5, 39], ['Carpintaria', 7.5, 17], ['Área Comum', 37.5, 17], ['Administração', 22.5, 17], ['Dormitório Militar', 80, 17], ['Cofre', 69.5, 1], ['Dormitório', 41.5, 1], ['Corredor', 34, 7], ['Corredor', 92, 17], ['Atelier', 86, 17], ['Prisão', 86, 1], ['Guarda', 90.5, 7], ['Banheiro', 57.5, 1],
 ]
-/** Salas vazias da esquerda, em pares (A1 | A2), ainda sem destino: só uma letra grande no chão para referência. */
-const SALAS = ([['A', 5], ['B', 15], ['C', 25.5], ['D', 37]] as const).flatMap(([l, y]): [string, number, number][] => [[l + 1, 7.5, y], [l + 2, 22.5, y]])
-  .filter(([n]) => !['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'].includes(n)) // A1 virou a Mina, A2 a Forja, B1 a Carpintaria, B2 a Administração, C1 o Jardim, C2 a Fazenda, D1 mato e D2 o Livre Comércio
+/** Áreas novas, ainda vazias: só um nome grande no chão para referência (tamanho da letra cabe na altura da faixa). */
+const SALAS: [string, number, number, number][] = [
+]
 
 export const andavel = (x: number, y: number) => !SOLIDO.includes(MAPA[y]?.[x] ?? '#')
 
@@ -412,6 +422,32 @@ const MATO = compose([[
   'G..h...gg.h.h.h.', '.h..hG.gg.hg..h.', '.h..gh.ggh.g.h.G', 'G.g.gh.ggg.G.g.h', 'h.g.Gggdgggh.gh.', '.g.ghdgddgdgg.g.', '.g.dgddddddgd.d.', '.d.dddddddddd.d.',
 ]], { d: '#1f4a1a', g: '#2f7a2a', h: '#4caa34', G: '#8ae05a' })
 
+// Dormitório: cama de campanha de 1,5 tile, lençol branco e cobertor vermelho. Ocupa 2 tiles ('k+') e fica centrada neles.
+const CAMA = grade([...Array(4).fill('.'.repeat(32)), '....kkkkkkkkkkkkkkkkkkkkkkkk....', '....knwwwwwkrrrrrrrrrrrrrrnk....', '....knwWWWwkrRrrrrrrrRrrrrnk....', '....knwwwwwkrrrrrrrrrrrrrrnk....', '....knwWWWwkrrrrRrrrrrrrrrnk....', '....knwwwwwkrrrrrrrrrrRrrrnk....', '....knkkkkkkrrrrrrrrrrrrrrnk....', '....knnnnnnnnnnnnnnnnnnnnnnk....', '....kkkkkkkkkkkkkkkkkkkkkkkk....', '.....kk..................kk.....'], { ...MADEIRA, w: '#f4ecd8', W: '#d8d0b8', r: '#8a1424', R: '#b0302a' })
+// Cofre: monte de moedas de ouro.
+const OURO = compose([['', '', '', '', '', '', '', '.......k........', '......kYk.......', '.....kyYyk..k...', '....kyyYyyk.kYk.', '...kyYyyyYykyyk.', '..kyyyYyyyyyyyyk', '.kyYyyyyYyyyYyyk', 'kkkkkkkkkkkkkkkk']], { y: '#e0a82a', Y: '#fff0a0' })
+
+// Banheiro: tina de madeira com água, latrina de madeira e bacia de metal num pé.
+const TINA = compose([['', '', '', '', '', '', '.kkkkkkkkkkkkkk.', 'kNNNNNNNNNNNNNNk', 'knbBbbbbbBbbbbnk', 'knbbbBbbbbbbBbnk', 'knbbbbbbBbbbbbnk', 'knnnnnnnnnnnnnnk', 'kkkkkkkkkkkkkkkk', '.kk..........kk.']], { ...MADEIRA, b: '#3a7ae8', B: '#9ad0ff' })
+const LATRINA = compose([['', '', '', '', '....kkkkkkkk....', '...knnnnnnnnk...', '...kNNNNNNNNk...', '...kkkkkkkkkk...', '..kNNNNNNNNNNk..', '..kNNkxxxxkNNk..', '..kNNkxxxxkNNk..', '..kNNNkkkkNNNk..', '..knnnnnnnnnnk..', '..kkkkkkkkkkkk..', '...kk......kk...']], { ...MADEIRA, x: '#1b1410' })
+const BACIA = compose([['', '', '', '', '', '', '...kkkkkkkkkk...', '..kiIIIIIIIIik..', '..kibBbbbbBbik..', '...kiiiiiiiik...', '.....knnnnk.....', '......knnk......', '......knnk......', '....kkknnkkk....', '....knnnnnnk....', '....kkkkkkkk....']], { ...MADEIRA, i: '#6a6a72', I: '#b8bcc4', b: '#3a7ae8', B: '#9ad0ff' })
+
+// Museu: estátua de pedra (a mesma do anão de ouro, em cinza) e esqueleto de anão num pedestal.
+const ESTATUA_PEDRA = tinge(dwarfSprite('Estátua', 'Metalsmith'), ['#2a2a2e', '#5a5a62', '#8a8a92', '#c8c8d0'])
+const ESQUELETO = compose([['........', '.....kkk', '....kwww', '....kwkk', '....kwww', '.....kwk', '......kw', '...kkkkw', '..kw.kww', '..kw.kwk', '..kw.kww', '..k..kwk', '....kwww', '....kw.k', '..kkkkkk', '..knnnnn']], { w: '#e8e0d0', n: '#6a6a72' })
+
+// Atelier: tear com fios brancos e o pano vermelho saindo, rolos de tecido vistos de ponta e roca de fiar.
+const TEAR = compose([['', '', 'kkkkkkkkkkkkkkkk', 'kNNNNNNNNNNNNNNk', 'kkkkkkkkkkkkkkkk', '.kn.w.w.w.w.wnk.', '.kn.w.w.w.w.wnk.', '.kn.w.w.w.w.wnk.', '.knrrrrrrrrrrnk.', '.knRrRrRrRrRrnk.', '.knrrrrrrrrrrnk.', 'kkkkkkkkkkkkkkkk', 'kNNNNNNNNNNNNNNk', 'kkkkkkkkkkkkkkkk', '.knk........knk.', '.kkk........kkk.']], { ...MADEIRA, w: '#f4ecd8', r: '#8a1424', R: '#b0302a' })
+const ROLOS = compose([['................', '................', '................', '................', '................', '................', '......kkk.......', '.....kbBbk......', '.....kBwBk......', '.....kbBbk......', '...kkkkkkkkk....', '..kgGgk.kyYyk...', '..kGwGk.kYwYk...', '..kgGgk.kyYyk...', '...kkk...kkk....', '................']], { b: '#3a5aa8', B: '#7a9ae8', g: '#3a8a2a', G: '#6cdc4a', y: '#e0a82a', Y: '#ffd23b', w: '#f4ecd8' })
+const ROCA = compose([['', '', '....kkkkkk......', '...knnnnnnk.....', '..kn.k..k.nk....', '..kn..kk..nk....', '..kn..kk..nk....', '..kn.k..k.nk..w.', '...knnnnnnk..ww.', '....kkkkkk..kwwk', '......kk....knnk', '......kk....knnk', '..kkkkkkkkkkkkkk', '..knnnnnnnnnnnnk', '..kkkkkkkkkkkkkk', '...kk........kk.']], { ...MADEIRA, w: '#f4ecd8' })
+
+// Prisão: grade de ferro na frente das celas e um monte de palha para dormir.
+const GRADE = compose([['kIi.kIi.kIi.kIi.', 'kIi.kIi.kIi.kIi.', 'kkkkkkkkkkkkkkkk', 'kiiiiiiiiiiiiiik', 'kIi.kIi.kIi.kIi.', 'kIi.kIi.kIi.kIi.', 'kIi.kIi.kIi.kIi.', 'kIi.kIi.kIi.kIi.', 'kIi.kIi.kIi.kIi.', 'kIi.kIi.kIi.kIi.', 'kIi.kIi.kIi.kIi.', 'kIi.kIi.kIi.kIi.', 'kiiiiiiiiiiiiiik', 'kkkkkkkkkkkkkkkk', 'kIi.kIi.kIi.kIi.', 'kIi.kIi.kIi.kIi.']], { i: '#4a4a52', I: '#8a8f99' })
+const PALHA = compose([['', '', '', '', '', '', '', '', '', '....kkkkkkkk....', '..kkyYyyYyyYkk..', '.kyYyyyYyyyyyYk.', '.kyyyYyyyYyyyyk.', '.kYyyyyyyyYyyyk.', '..kkkkkkkkkkkk..']], { y: '#c8a050', Y: '#e8c070' })
+
+// Porta do cofre fechada: batente de ferro com rebites de ouro e duas folhas com volante. Tranca a passagem.
+const PORTA_COFRE = grade(['kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk', 'kIIIyIIIIyIIIIyIIIIyIIIIyIIIIIIk', 'kIkkkkkkkkkkkkkkkkkkkkkkkkkkkkIk', 'kIkiiiiiiiiiiiikkiiiiiiiiiiiikIk', 'kykiiiiiiiiiiiikkiiiiiiiiiiiikyk', 'kIkiiYiiiiiiiiikkiiiiiiiiiYiikIk', 'kIkiiiiiiiiiiiikyiiiiiiiiiiiikIk', 'kIkiiiiiiiiiiyikkiyiiiiiiiiiikIk', 'kykiiiiiiiiiiiiyyiiiiiiiiiiiikyk', 'kIkiiiiiiiiiyiykkyiyiiiiiiiiikIk', 'kIkiiiiiiiiiiiiyyiiiiiiiiiiiikIk', 'kIkiiiiiiiiiiyikkiyiiiiiiiiiikIk', 'kykiiYiiiiiiiiikyiiiiiiiiiYiikyk', 'kIkiiiiiiiiiiiikkiiiiiiiiiiiikIk', 'kIkiiiiiiiiiiiikkiiiiiiiiiiiikIk', 'kIkkkkkkkkkkkkkkkkkkkkkkkkkkkkIk'], { i: '#4a4a52', I: '#8a8f99', y: '#e0a82a', Y: '#fff0a0' })
+
 const PROP: Record<string, Grid> = {
   ...MINERIO, ...PEDRAS, '!': MICROFONE, '^': ESTATUA, B: BARRIL, U: icone('m'), C: CALDEIRAO, F: FORJA, L: icone('A'), c: icone('c'), b: icone('b'), g: icone('g'),
   f: CERCA, T: MESA, '[': mesaLonga(2), ']': mesaLonga(3), ';': CADEIRA, $: PEPITA, E: ESTANTE, N: FORNALHA, I: BIGORNA, Y: ARVORE, u: ARBUSTO, l: FLORES,
@@ -425,7 +461,7 @@ const PROP: Record<string, Grid> = {
   Z: grade(BARRACA, { ...BENS, a: '#3a8a2a', A: '#ffd23b', 1: '#5ce6e6', 2: '#e83a1a', 3: '#c070e0' }), // poções
   '(': CARRINHO,
   j: LAPIDARIO, q: MOSTRUARIO, y: GEMAS, i: COLMEIA, e: AMANITA, n: PARDOS,
-  '{': BANCADA_CARP, '}': TABUAS, '<': TORAS, '*': ESCRIVANINHA, '?': BAU, '>': BANCADA_ALQ, '|': POCOES, '/': MATO,
+  '{': BANCADA_CARP, '}': TABUAS, '<': TORAS, '*': ESCRIVANINHA, '?': BAU, '>': BANCADA_ALQ, '|': POCOES, '/': MATO, k: CAMA, '"': OURO, '0': TINA, _: LATRINA, ':': BACIA, '`': ESTATUA_PEDRA, ')': ESQUELETO, á: TEAR, é: ROLOS, ó: ROCA, í: GRADE, ú: PALHA, ü: PORTA_COFRE,
 }
 const OVELHA = compose([[
   '', '', '', '', '', '....kkkkkk......', '...kwwWwwwk.kk..', '..kwWwwwWwwkddk.', '.kwwwwwwwwwkdedk', '.kwWwwwwWwwkdddk',
@@ -459,12 +495,12 @@ const ORC = compose([[
   '..kkgggg', '.kAAAAAA', 'kgkAaAAA', 'kgkAAAaA', 'kkkAAAAA', '...kddkk', '...kddk.', '...kkkk.',
 ]], { g: '#5a7a3a', e: '#ff3b2f', w: '#f4ecd8', A: '#4a4a52', a: '#8a8f99', d: '#3a2a18' })
 export const EXTRAS = [
-  { id: 'goblin', nome: 'Grishnak, o Goblin', fala: 'Psiu... troco ouro de anão por um gole. Ninguém precisa saber.', x: 45, y: 35, s: 1, g: GOBLIN },
-  { id: 'elfo', nome: 'Elandor, o Elfo', fala: 'Vim provar a cerveja anã. Dizem que é melhor que vinho élfico. Duvido.', x: 8, y: 27, s: 1, g: ELFO },
-  { id: 'snik', nome: 'Snik, o Goblin', fala: 'Bugigangas! Pedras brilhantes! Quase nada roubado!', x: 26, y: 36, s: 1, g: GOBLIN },
-  { id: 'grot', nome: 'Grot, o Goblin', fala: 'Não olha pra minha barraca. Olha pra lá. ...Pronto, já era.', x: 53, y: 41, s: 1, g: GOBLIN },
-  { id: 'orc', nome: 'Urzog, o Orc', fala: 'Orc quer cerveja. Orc paga com... respeito.', x: 32, y: 41, s: 1, g: ORC },
-  { id: 'dragao', nome: 'Ignaroth, o Dragão', fala: 'Zzz... quem chega perto do meu ouro? ...Ah, só um anão. Zzz.', x: 9, y: 2, s: 2, g: DRAGAO },
+  { id: 'goblin', nome: 'Grishnak, o Goblin', fala: 'Psiu... troco ouro de anão por um gole. Ninguém precisa saber.', x: 45, y: 41, s: 1, g: GOBLIN },
+  { id: 'elfo', nome: 'Elandor, o Elfo', fala: 'Vim provar a cerveja anã. Dizem que é melhor que vinho élfico. Duvido.', x: 8, y: 33, s: 1, g: ELFO },
+  { id: 'snik', nome: 'Snik, o Goblin', fala: 'Bugigangas! Pedras brilhantes! Quase nada roubado!', x: 26, y: 42, s: 1, g: GOBLIN },
+  { id: 'grot', nome: 'Grot, o Goblin', fala: 'Não olha pra minha barraca. Olha pra lá. ...Pronto, já era.', x: 53, y: 47, s: 1, g: GOBLIN },
+  { id: 'orc', nome: 'Urzog, o Orc', fala: 'Orc quer cerveja. Orc paga com... respeito.', x: 32, y: 47, s: 1, g: ORC },
+  { id: 'dragao', nome: 'Ignaroth, o Dragão', fala: 'Zzz... quem chega perto do meu ouro? ...Ah, só um anão. Zzz.', x: 9, y: 8, s: 2, g: DRAGAO },
 ]
 
 function pinta(ctx: CanvasRenderingContext2D, g: Grid, x: number, y: number) {
@@ -618,11 +654,10 @@ function desenhaMapa() {
     else if (PROP[ch] && andavel(x, y)) soltos.push({ img: (imgs[ch] ??= sprite(PROP[ch])), x: x * T, y: y * T, pe: y * T + pe(PROP[ch]) })
     else if (PROP[ch]) pinta(ctx, PROP[ch], x * T, y * T)
   }))
-  ctx.font = '96px VT323, monospace'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   ctx.fillStyle = '#ffd23b40'
-  for (const [letra, sx, sy] of SALAS) ctx.fillText(letra, sx * T + 8, sy * T + 8)
+  for (const [nome, sx, sy, px] of SALAS) (ctx.font = `${px}px VT323, monospace`), ctx.fillText(nome, sx * T + 8, sy * T + 8)
   const rio = MAPA.flatMap((linha, y) => [...linha].flatMap((ch, x) => (ch === '~' ? [[x, y]] : [])))
   return { mapa: c, soltos, rio, aves }
 }
