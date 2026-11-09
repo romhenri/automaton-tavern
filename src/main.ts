@@ -2,6 +2,7 @@ import './style.css'
 import { ERRO, executar } from './afd.ts'
 import { grafo } from './grafo.ts'
 import { mapaInteiro, modoLivre } from './livre.ts'
+import { enquadra } from './tela.ts'
 import { CAPACIDADE, DRINKS, PACIENCIA, novoTurno, servir, type Turno, type Veredito } from './jogo.ts'
 import { ALFABETO, RECEITAS, type Receita } from './receitas.ts'
 import { BARRIL, LIXEIRA, PEPITA, VOLTAR, canecaSprite, dwarfSprite, icone, svg, type Expressao } from './sprites.ts'
@@ -26,10 +27,11 @@ const retrato = (r: Receita, expr: Expressao = 'neutro') => dwarfSprite(r.client
 const ouro = (n: number) => `${svg(PEPITA, 14, 'pepita')}${n}`
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`)
 
-// Resolução base 320x180 em dobro (640x360), escalada por inteiro.
+const toque = matchMedia('(pointer: coarse)')
 function escala() {
-  const k = Math.min(innerWidth / 640, innerHeight / 360)
-  document.documentElement.style.setProperty('--escala', String(k >= 1 ? Math.floor(k) : k))
+  const { escala, giro } = enquadra(innerWidth, innerHeight, toque.matches)
+  document.documentElement.style.setProperty('--escala', String(escala))
+  document.documentElement.style.setProperty('--giro', giro ? '90deg' : '0deg')
 }
 addEventListener('resize', escala)
 escala()
