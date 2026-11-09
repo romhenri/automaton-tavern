@@ -19,7 +19,7 @@
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
-  margin: 0; overflow: hidden; display: grid; place-items: center;
+  margin: 0; overflow: hidden;
   color: var(--ink); font: 16px/1.15 var(--font); -webkit-font-smoothing: none;
   background: #000; touch-action: manipulation; /* sem zoom de toque duplo */
 }
@@ -38,8 +38,8 @@ button { font: inherit; color: inherit; }
 .linha { display: flex; gap: 6px; justify-content: center; }
 
 /* ---------------------------------------------------------------- palco 640x360 escalado */
-#palco {
-  position: relative; flex: none; width: 640px; height: 360px; overflow: hidden;
+#palco { /* fixo no centro: o tamanho sem escala (640x360) não empurra a página nem o viewport do celular */
+  position: fixed; left: 50%; top: 50%; margin: -180px 0 0 -320px; width: 640px; height: 360px; overflow: hidden;
   transform: rotate(var(--giro)) scale(var(--escala));
   background:
     radial-gradient(ellipse at 85% 110%, #ff8a2a30 0%, transparent 45%),
