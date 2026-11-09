@@ -255,3 +255,4 @@ button { font: inherit; color: inherit; }
 .mapa .painel-titulo { justify-self: stretch; margin: 0; }
 .mapa .painel-titulo .btn { padding: 1px 4px; min-height: 0; }
 .mapa canvas { display: block; height: 310px; width: auto; border: 2px solid #1b1410; } /* a fortaleza inteira cabe no painel */
+@media (pointer: coarse) { .dpad, .interagir, .tela-livre .voltar { zoom: 2; } } /* dedo precisa de botão maior */
